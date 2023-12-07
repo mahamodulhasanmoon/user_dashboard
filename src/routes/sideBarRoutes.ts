@@ -17,16 +17,16 @@ export const sideBarRoutes:Array<any> = [
     {
         title:"Shortener",
         icon: CiLink,
-        link:'/information'
+        link:'/shorter'
     },
     {
         title:"Websites",
         icon: CgWebsite,
-        link:'/information'
+        link:'/web_links'
     },
     {
         title:"Notice",
         icon: GoBell,
-        link:'/information'
+        link:'/notices'
     }
 ];
