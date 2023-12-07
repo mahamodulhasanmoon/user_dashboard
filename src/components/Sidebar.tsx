@@ -59,15 +59,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute   drop-shadow dark:bg-boxdark dark:drop-shadow-none left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-white duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex  items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <NavLink to="/">
           {/* <img src={Logo} alt="Logo" /> */}
-          <h2 className='text-center text-2xl font-bold'>User Dashboard</h2>
+          <h2 className='text-center border-r-1 border-e-boxdark text-2xl font-bold'>User Dashboard</h2>
         </NavLink>
 
         <button
@@ -102,10 +102,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <>
                       <NavLink
                         to="#"
-                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-black dark:text-stroke duration-300 ease-in-out hover:bg-stroke dark:hover:bg-meta-4 ${
                           (pathname === '/' ||
                             pathname.includes('dashboard')) &&
-                          'bg-graydark dark:bg-meta-4'
+                          'hover:bg-stroke  '
                         }`}
                         onClick={(e) => {
                           e.preventDefault();
@@ -141,7 +141,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         </svg>
                         Dashboard
                         <svg
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current  ${
                             open && 'rotate-180'
                           }`}
                           width="20"
@@ -170,8 +170,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             <NavLink
                               to="/overview"
                               className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
+                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out ' +
+                                (isActive && '!text-meta-4')
                               }
                             >
                               Overview
@@ -190,9 +190,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li key={index}>
                 <NavLink
                   to={routes.link}
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-form-stroke duration-300 ease-in-out hover:bg-stroke dark:hover:bg-meta-4 ${
                     pathname.includes(routes.link) &&
-                    'bg-graydark dark:bg-meta-4'
+                    'bg-stroke dark:bg-meta-4'
                   }`}
                 >
 <routes.icon />

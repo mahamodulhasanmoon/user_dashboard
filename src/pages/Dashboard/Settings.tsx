@@ -100,11 +100,11 @@ const Settings = () => {
                         className="mb-3 block text-sm font-medium text-black dark:text-white"
                         htmlFor="phoneNumber"
                       >
-                        Phone Number
+                        Password
                       </label>
                       <input
                         className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                        type="text"
+                        type="password"
                         name="phoneNumber"
                         id="phoneNumber"
                         placeholder="+990 3343 7865"
@@ -171,6 +171,7 @@ const Settings = () => {
                       id="Username"
                       placeholder="devidjhon24"
                       defaultValue="devidjhon24"
+                      disabled
                     />
                   </div>
 
