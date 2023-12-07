@@ -8,62 +8,72 @@ const ConversionTable = () => {
         Conversions
       </h4>
 
-      <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
-          <div className="p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Source
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
-            </h5>
-          </div>
-        </div>
+{/* for table */}
 
-        <div className="grid grid-cols-3 sm:grid-cols-5">
-          <div className="flex items-center gap-3 p-2.5 xl:p-5">
-            <div className="flex-shrink-0">
-              <img src={BrandFive} alt="Brand" />
-            </div>
-            <p className="hidden text-black dark:text-white sm:block">
-              Facebook
-            </p>
-          </div>
+<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" className="px-6 py-3">
+          ID
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Site Name
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Email
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Password
+        </th>
+        <th scope="col" className="px-6 py-3">
+          OTP Code
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Time
+        </th>
+        <th scope="col" className="px-6 py-3">
+          Owner
+        </th>
+ 
+      </tr>
+    </thead>
+    <tbody className='text-center'>
 
-          <div className="flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">1.2K</p>
-          </div>
+      <tr className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
+        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+         1
+        </th>
+        <td className="px-6 py-4">
+         Facebook
+        </td>
+        <td className="px-6 py-4">
+         test@gmail.com
+        </td>
+        <td className="px-6 py-4">
+        TeTs@492
+        </td>
+        <td className="px-6 py-4">
+        230533
+        </td>
+        <td className="px-6 py-4">
+        16.12.2023 08:40PM
+        </td>
+        <td className="px-6 py-4">
+        Mahamodul
+        </td>
 
-          <div className="flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-meta-3">$2,740</p>
-          </div>
+      </tr>
 
-          <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-            <p className="text-black dark:text-white">230</p>
-          </div>
 
-          <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-            <p className="text-meta-5">1.9%</p>
-          </div>
-        </div>
-      </div>
+
+
+    </tbody>
+  </table>
+</div>
+
+
+
     </div>
   );
 };

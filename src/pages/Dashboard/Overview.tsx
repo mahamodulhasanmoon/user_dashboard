@@ -41,11 +41,9 @@ const data = [
      
         
       </div>
-      {/* testting All Components */}
+
       <div className="my-5">
-        {/* <TableThree/>
-        <TableTwo/> */}
-        {/* <TableOne/> */}
+
         <ConversionTable/>
       </div>
 

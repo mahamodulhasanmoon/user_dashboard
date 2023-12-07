@@ -171,7 +171,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               to="/overview"
                               className={({ isActive }) =>
                                 'group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out ' +
-                                (isActive && '!text-meta-4')
+                                (isActive && '!text-form-stroke duration-300 ease-in-out')
                               }
                             >
                               Overview

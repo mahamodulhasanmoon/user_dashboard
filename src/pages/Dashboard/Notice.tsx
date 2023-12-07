@@ -4,12 +4,12 @@ export default function Notice() {
    const  notifications=[
         {
             title:'Password Is Being Updated',
-            description:'Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim',
+            description:'Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim',
             time:'12 May, 2025 12:00 PM'
         },
         {
             title:'Account Has Been Approved',
-            description:'Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim',
+            description:'Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim',
             time:'12 May, 2025 12:00 PM'
         }
     ]
@@ -34,7 +34,7 @@ export default function Notice() {
                     {description}
                       </p>
         
-                      <p className="text-xs">{time}</p>
+                      <p className="text-xs font-bold text-meta-5">{time}</p>
                     </Link>
                   </li>
                 ))
