@@ -27,7 +27,7 @@ export default function Notice() {
                       className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
                       to="#"
                     >
-                      <p className="text-sm">
+                      <p className="text-lg">
                         <span className="text-black dark:text-meta-3 font-bold">
                           {title}
                         </span>{' '}

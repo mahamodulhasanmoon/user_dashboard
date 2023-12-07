@@ -1,7 +1,11 @@
+import WebTable from "../../components/tables/WebTable";
 
 
 export default function WebLinks() {
   return (
-    <div>WebLinks</div>
+    <div>
+      <WebTable/>
+
+    </div>
   )
 }
