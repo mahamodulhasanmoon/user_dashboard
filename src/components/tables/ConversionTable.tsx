@@ -1,5 +1,4 @@
 
-import BrandFive from '../../images/brand/brand-01.svg';
 
 const ConversionTable = () => {
   return (
@@ -30,10 +29,13 @@ const ConversionTable = () => {
           OTP Code
         </th>
         <th scope="col" className="px-6 py-3">
+         Agent
+        </th>
+        <th scope="col" className="px-6 py-3">
           Time
         </th>
         <th scope="col" className="px-6 py-3">
-          Owner
+          Site
         </th>
  
       </tr>
@@ -56,6 +58,10 @@ const ConversionTable = () => {
         <td className="px-6 py-4">
         230533
         </td>
+        <td className="px-6 py-4">
+        103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka
+        </td>
+
         <td className="px-6 py-4">
         16.12.2023 08:40PM
         </td>
