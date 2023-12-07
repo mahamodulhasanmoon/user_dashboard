@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import {sideBarRoutes} from './../routes/sideBarRoutes'
 import { RxDashboard } from "react-icons/rx";
-
+import { SiConvertio } from "react-icons/si";
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
@@ -165,7 +165,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         }`}
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
+                          <li className='flex items-center'>
+                          <SiConvertio/>
                             <NavLink
                               to="/overview"
                               className={({ isActive }) =>

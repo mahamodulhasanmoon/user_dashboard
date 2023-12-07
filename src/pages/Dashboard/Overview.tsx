@@ -2,6 +2,8 @@
 import { GoGraph } from "react-icons/go";
 import OverviewCard from '../../components/OverviewCard.tsx';
 
+import ConversionTable from "../../components/tables/ConversionTable.tsx";
+
 const Overview = () => {
 const data = [
   {
@@ -36,7 +38,15 @@ const data = [
           data.map((item,i) =>  <OverviewCard key={i} item={item} /> )
         }
        
+     
         
+      </div>
+      {/* testting All Components */}
+      <div className="my-5">
+        {/* <TableThree/>
+        <TableTwo/> */}
+        {/* <TableOne/> */}
+        <ConversionTable/>
       </div>
 
     </>
