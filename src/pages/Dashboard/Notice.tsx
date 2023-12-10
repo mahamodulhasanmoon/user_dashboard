@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 
-interface INotification {
+export interface INotification {
   title: string,
   description: string,
   updatedAt?: string,
@@ -99,7 +99,7 @@ export default function Notice() {
 
         <ul className="flex h-auto flex-col overflow-y-auto">
             {
-                notifications?.map(({title,description, updatedAt,_id},index)=>(
+              (notifications.length >0 ) ? notifications?.map(({title,description, updatedAt,_id},index)=>(
                     <li key={index}>
                     <Link
                       className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
@@ -122,6 +122,12 @@ export default function Notice() {
                     </Link>
                   </li>
                 ))
+                :
+                
+                  (
+                    <h2 className='text-center text-2xl mt-12 font-bold dark:text-bodydark1'> No notification Found</h2>
+                  )
+                
             }
 
 
