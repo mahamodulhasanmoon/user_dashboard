@@ -1,7 +1,7 @@
 import {  useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
-import {sideBarRoutes} from './../routes/sideBarRoutes'
+import { sideBarAdminRoutes, sideBarRoutes} from './../routes/sideBarRoutes'
 import { RxDashboard } from "react-icons/rx";
 import { SiConvertio } from "react-icons/si";
 interface SidebarProps {
@@ -186,7 +186,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
 
              { 
-             sideBarRoutes.map((routes:any,index:any) => (
+             sideBarAdminRoutes.map((routes:any,index:any) => (
               <li key={index}>
                 <NavLink
                   to={routes.link}

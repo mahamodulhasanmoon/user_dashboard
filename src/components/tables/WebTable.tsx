@@ -4,34 +4,38 @@ const WebTable = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-       Web
+       Website Urls
       </h4>
+      <div className="buttons my-5 flex items-center justify-center gap-2 flex-wrap text-center">
+        <button className="inline-flex rounded items-center justify-center bg-primary px-2 py-1 text-center font-medium text-white hover:bg-opacity-90 ">Sixa</button>
+        <button className="inline-flex rounded items-center justify-center bg-bodydark2 px-2 py-1 text-center font-medium text-meta-4 hover:bg-opacity-90 ">Sixa</button>
+      </div>
 
       <div className="flex flex-col">
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Source
+              Website
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
+              URL
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
+              Validity
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
+             Status
             </h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
+              Last Renue Date
             </h5>
           </div>
         </div>

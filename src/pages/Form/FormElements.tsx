@@ -1,18 +1,9 @@
-import Breadcrumb from '../../components/Breadcrumb';
-import CheckboxFive from '../../components/CheckboxFive';
-import CheckboxFour from '../../components/CheckboxFour';
-import CheckboxOne from '../../components/CheckboxOne';
-import CheckboxThree from '../../components/CheckboxThree';
-import CheckboxTwo from '../../components/CheckboxTwo';
-import SwitcherFour from '../../components/SwitcherFour';
-import SwitcherOne from '../../components/SwitcherOne';
-import SwitcherThree from '../../components/SwitcherThree';
-import SwitcherTwo from '../../components/SwitcherTwo';
+
+
 
 const FormElements = () => {
   return (
     <>
-      <Breadcrumb pageName="FormElements" />
 
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
         <div className="flex flex-col gap-9">
@@ -68,10 +59,7 @@ const FormElements = () => {
               </h3>
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
-              <SwitcherOne />
-              <SwitcherTwo />
-              <SwitcherThree />
-              <SwitcherFour />
+
             </div>
           </div>
 
@@ -193,11 +181,7 @@ const FormElements = () => {
               </h3>
             </div>
             <div className="flex flex-col gap-5.5 p-6.5">
-              <CheckboxOne />
-              <CheckboxTwo />
-              <CheckboxThree />
-              <CheckboxFour />
-              <CheckboxFive />
+
             </div>
           </div>
 

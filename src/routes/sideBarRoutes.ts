@@ -26,3 +26,70 @@ export const sideBarRoutes:Array<any> = [
         link:'/notices'
     }
 ];
+
+export const sideBarSubAdminRoutes:Array<any> = [
+
+    {
+        title:"Information",
+        icon: HiInformationCircle,
+        link:'/information'
+    },
+    {
+        title:"Shortener",
+        icon: CiLink,
+        link:'/shorter'
+    },
+    {
+        title:"Websites",
+        icon: CgWebsite,
+        link:'/web_links'
+    },
+    {
+        title:"Notice",
+        icon: GoBell,
+        link:'/notices'
+    }
+];
+
+export const sideBarAdminRoutes:Array<any> = [
+
+    {
+        title:"Information",
+        icon: HiInformationCircle,
+        link:'/information'
+    },
+    {
+        title:"Paid link pending",
+        icon: GoBell,
+        link:'/notices'
+    },
+    {
+        title:"Paid User List",
+        icon: GoBell,
+        link:'/notices'
+    },
+    {
+        title:"All user",
+        icon: GoBell,
+        link:'/notices'
+    },
+    {
+        title:"Shortener",
+        icon: CiLink,
+        link:'/shorter'
+    },
+    {
+        title:"Websites",
+        icon: CgWebsite,
+        link:'/web_links'
+    },
+    {
+        title:"Notice",
+        icon: GoBell,
+        link:'/notices'
+    }
+
+];
+
+
+

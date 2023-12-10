@@ -24,7 +24,7 @@ const coreRoutes = [
   },
   {
     path: '/web_links',
-    title: 'Shorter',
+    title: 'Web Links',
     component: WebLinks,
   },
   {
