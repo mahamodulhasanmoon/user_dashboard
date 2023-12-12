@@ -44,7 +44,6 @@ export async function updateData<T>(endpoint: string, data: any): Promise<T> {
   try {
     console.log(data);
     const response: AxiosResponse<T> = await axiosInstance.patch<T>(`${endpoint}`, data);
-    console.log(response);
     return response?.data;
   } catch (error) {
     toast.error('Error:', (error as any).message);
