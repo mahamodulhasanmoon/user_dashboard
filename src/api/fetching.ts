@@ -7,7 +7,7 @@ export async function getData<T>(endpoint: string): Promise<T> {
     const response: AxiosResponse<T> = await axiosInstance.get<T>(`${endpoint}`);
     return response.data;
   } catch (error) {
-    console.error((error as any).message);
+   toast.error((error as any).message);
     throw error;
   }
 }
@@ -45,7 +45,7 @@ export async function updateData<T>(endpoint: string, data: any): Promise<T> {
     console.log(data);
     const response: AxiosResponse<T> = await axiosInstance.patch<T>(`${endpoint}`, data);
     console.log(response);
-    return response.data;
+    return response?.data;
   } catch (error) {
     toast.error('Error:', (error as any).message);
     throw error;

@@ -1,10 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { server_url } from '../constant/environment';
 
-// Retrieve the token from localStorage
 const token:any = localStorage.getItem('access_token');
-
-// Define the API base URL
 const apiBaseURL = server_url;
 
 // Create Axios instance
