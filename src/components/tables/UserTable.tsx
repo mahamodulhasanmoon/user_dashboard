@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
+import { getData } from "../../api/fetching";
+import { formatUtcToLocal } from "../../utils/DateFormater";
 
 
 const UserTable = () => {
+    const [users,setUsers]= useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const data = await getData(`auth/users`);
+            setUsers((data as any)?.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -10,59 +26,52 @@ const UserTable = () => {
                 ID
               </th>
               <th scope="col" className="px-6 py-3">
-                Site Name
+                 Name
               </th>
               <th scope="col" className="px-6 py-3">
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
-                Password
+               Created Time
               </th>
               <th scope="col" className="px-6 py-3">
-                OTP Code
+                Validity
               </th>
               <th scope="col" className="px-6 py-3">
-               Agent
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Time
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Site
+                Status
               </th>
        
             </tr>
           </thead>
           <tbody className='text-center'>
-      
-            <tr className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
+            {
+                users?.map(({_id,name,email,updatedAt},index)=>(
+            <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-               1
+               {index + 1}
               </th>
               <td className="px-6 py-4">
-               Facebook
+               {name}
               </td>
               <td className="px-6 py-4">
-               test@gmail.com
+               {email}
+              </td>
+
+              <td className="px-6 py-4">
+              {formatUtcToLocal(updatedAt)}
               </td>
               <td className="px-6 py-4">
-              TeTs@492
+              362 days
               </td>
-              <td className="px-6 py-4">
-              230533
-              </td>
-              <td className="px-6 py-4">
-              103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka
-              </td>
-      
-              <td className="px-6 py-4">
-              16.12.2023 08:40PM
-              </td>
-              <td className="px-6 py-4">
-              Mahamodul
+              <td className="px-6 font-bold text-meta-3 py-4">
+             Approved
               </td>
       
             </tr>
+                ))
+            }
+      
+
       
       
       

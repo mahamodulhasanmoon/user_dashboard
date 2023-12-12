@@ -39,16 +39,21 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+    
       try {
-        const data:any = await getData(`auth/me`);
-        if (data.status === 'success') {
-          setToken(data?.data?.token);
-          setRole(data?.data?.role);
-          setUser(data?.data);
-          setLoading(false);
-        } else {
-          toast.error("something went wrong");
+        if(localStorage.getItem('access_token')){
+          const data:any = await getData(`auth/me`);
+          if (data.status === 'success') {
+            setToken(data?.data?.token);
+            setRole(data?.data?.role);
+            setUser(data?.data);
+            setLoading(false);
+          } else {
+            toast.error("something went wrong");
+          }
         }
+       
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
