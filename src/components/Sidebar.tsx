@@ -26,7 +26,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   );
   let sideRoutes;
 
-  if (user.role === 'admin') {
+  if (user?.role === 'admin') {
     sideRoutes = sideBarAdminRoutes
   }else{
     sideRoutes = sideBarRoutes

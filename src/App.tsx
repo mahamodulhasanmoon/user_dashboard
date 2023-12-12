@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useContext, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
@@ -7,11 +7,13 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
 import routes from './routes';
+import { AuthContext } from './Contexts/AuthProvider';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const {role}= useContext(AuthContext)
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -28,7 +30,6 @@ function App() {
       />
       <Routes>
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route element={<DefaultLayout />}>
           <Route index element={<Overview />} />
           {routes.map((routes, index) => {

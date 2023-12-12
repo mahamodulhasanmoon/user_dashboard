@@ -1,7 +1,7 @@
 
 import { HiInformationCircle } from "react-icons/hi2";
 import { CgWebsite } from "react-icons/cg";
-import { GoBell } from "react-icons/go";
+import { GoBell, GoPerson } from "react-icons/go";
 import { CiLink } from "react-icons/ci";
 export const sideBarRoutes:Array<any> = [
 
@@ -64,14 +64,9 @@ export const sideBarAdminRoutes:Array<any> = [
         link:'/notices'
     },
     {
-        title:"Paid User List",
-        icon: GoBell,
-        link:'/notices'
-    },
-    {
         title:"All user",
-        icon: GoBell,
-        link:'/notices'
+        icon: GoPerson,
+        link:'/users'
     },
     {
         title:"Shortener",

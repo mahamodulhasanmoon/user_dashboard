@@ -15,14 +15,14 @@ export interface User {
 
 export interface AuthContextProps {
   logOut?: (e: React.SyntheticEvent) => void;
-  user?: User | null;
+  user?: User | null | undefined;
   loading?: boolean;
   token?: string | null;
   role?: string | null;
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
-  handleLogin?: (data: any) => Promise<any>; // You might want to replace 'any' with the actual type of your login data
+  handleLogin?: (data: any) => Promise<User>; // You might want to replace 'any' with the actual type of your login data
 }
 
 export const AuthContext = createContext<AuthContextProps | any>(null);
@@ -65,7 +65,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (response?.status === 200) {
       toast.success("Successfully logged in");
       // reset(); 
-      return response.data;
+      return response;
     }
   };
 
@@ -74,8 +74,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem("access_token");
     setUser(null);
     setToken(null);
-    // Navigate('/login'); // Use the appropriate method to navigate to the login page
+    window.location.href = '/signin';
   };
+  
 
   const authInfo: AuthContextProps = {
     user,

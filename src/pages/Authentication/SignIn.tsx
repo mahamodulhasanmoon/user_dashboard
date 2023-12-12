@@ -6,6 +6,7 @@ import { CiLock, CiMail } from 'react-icons/ci';
 import { useForm } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
 import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
+import toast from 'react-hot-toast';
 
 interface LoginData{
   email: string;
@@ -14,22 +15,27 @@ interface LoginData{
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
   const {handleLogin,user}:AuthContextProps = useContext(AuthContext)
-  const navivate = useNavigate()
+  const navigate = useNavigate()
 
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
 
     useEffect(()=>{
       if (user) {
-        return navivate(from, { replace: true });
+        return navigate(from, { replace: true });
        }
    
     },[])
 
   const onSubmit = async (data:LoginData) => {
-    
-    const result =  await handleLogin?.(data)
-    console.log(result,'res')
+    try {
+      const result =  await handleLogin?.(data)
+      console.log(result);
+      return navigate(from, { replace: true });
+    } catch (error) {
+      toast.error((error as any)?.message)
+    }
+
     
   };
 ;

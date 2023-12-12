@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import UserManagement from '../pages/Dashboard/subAdmin/UserManagement';
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
 const Information = lazy(() => import('../pages/Dashboard/Information'));
 const Shorter = lazy(() => import('../pages/Dashboard/Shorter'));
@@ -39,5 +40,14 @@ const coreRoutes = [
   }
 ];
 
-const routes = [...coreRoutes];
+const adminRoutes = [
+  {
+    path: '/users',
+    title: 'users',
+    component: UserManagement,
+  },
+  
+];
+
+const routes = [...coreRoutes,...adminRoutes];
 export default routes;
