@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import svgImg from '../../images/svg/login.svg';
 import Logo from '../../images/logo/logo.svg';
 import { CiLock, CiMail } from 'react-icons/ci';
 import { useForm } from 'react-hook-form';
+import { useContext, useEffect } from 'react';
+import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 
 interface LoginData{
   email: string;
@@ -11,11 +13,27 @@ interface LoginData{
 }
 const SignIn = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
+  const {handleLogin,user}:AuthContextProps = useContext(AuthContext)
+  const navivate = useNavigate()
 
-  const onSubmit = (data:LoginData) => {
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
+
+    useEffect(()=>{
+      if (user) {
+        return navivate(from, { replace: true });
+       }
+   
+    },[])
+
+  const onSubmit = async (data:LoginData) => {
     
-    console.log(data);
+    const result =  await handleLogin?.(data)
+    console.log(result,'res')
+    
   };
+;
+
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">

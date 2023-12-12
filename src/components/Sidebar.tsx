@@ -1,15 +1,19 @@
-import {  useEffect, useRef, useState } from 'react';
+import {  useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import { sideBarAdminRoutes, sideBarRoutes} from './../routes/sideBarRoutes'
 import { RxDashboard } from "react-icons/rx";
 import { SiConvertio } from "react-icons/si";
+import { AuthContext } from '../Contexts/AuthProvider';
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+ 
+
+  const {user} = useContext<any>(AuthContext)
   const location = useLocation();
   const { pathname } = location;
 
@@ -20,6 +24,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
+  let sideRoutes;
+
+  if (user.role === 'admin') {
+    sideRoutes = sideBarAdminRoutes
+  }else{
+    sideRoutes = sideBarRoutes
+  }
 
   // close on click outside
   useEffect(() => {
@@ -67,7 +78,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       <div className="flex  items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <NavLink to="/">
           {/* <img src={Logo} alt="Logo" /> */}
-          <h2 className='text-center border-r-1 border-e-boxdark text-2xl font-bold'>User Dashboard</h2>
+          <h2 className='text-center border-r-1 border-e-boxdark text-2xl font-bold'> {
+            user?.role === 'user' ? 'User Dashboard' : 'Admin Dashboard'
+          }</h2>
         </NavLink>
 
         <button
@@ -186,7 +199,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
 
              { 
-             sideBarAdminRoutes.map((routes:any,index:any) => (
+             
+             sideRoutes?.map((routes:any,index:any) => (
               <li key={index}>
                 <NavLink
                   to={routes.link}

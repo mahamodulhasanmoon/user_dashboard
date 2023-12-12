@@ -3,25 +3,29 @@ import { getData, postData } from "../api/fetching";
 import { toast } from "react-toastify";
 
 
-interface User {
+export interface User {
   // Define your user object properties here
-  id: string;
+  _id: string;
   name: string;
-  // ...
+  email: string;
+  role: string;
+  gender: string;
+ 
 }
 
-interface AuthContextProps {
+export interface AuthContextProps {
   logOut?: (e: React.SyntheticEvent) => void;
   user?: User | null;
   loading?: boolean;
   token?: string | null;
+  role?: string | null;
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
   handleLogin?: (data: any) => Promise<any>; // You might want to replace 'any' with the actual type of your login data
 }
 
-export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps | any>(null);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -29,6 +33,7 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const[role,setRole]= useState<string | null >(null)
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,6 +43,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const data:any = await getData(`auth/me`);
         if (data.status === 'success') {
           setToken(data?.data?.token);
+          setRole(data?.data?.role);
           setUser(data?.data);
           setLoading(false);
         } else {
@@ -58,7 +64,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(response?.data?.user);
     if (response?.status === 200) {
       toast.success("Successfully logged in");
-      // reset(); // Assuming 'reset' is a function to reset the form or any other state
+      // reset(); 
       return response.data;
     }
   };
@@ -79,7 +85,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading,
     setUser,
     handleLogin,
-    logOut
+    logOut,
+    role
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

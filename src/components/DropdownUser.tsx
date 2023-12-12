@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import UserOne from '../images/user/user-01.png';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const {user} = useContext<any>(AuthContext)
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -45,9 +47,9 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Mahamodul Hasan Moon
+           {user.name}
           </span>
-          <span className="block text-xs">coddermoon</span>
+          <span className="block text-xs">{user?.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">

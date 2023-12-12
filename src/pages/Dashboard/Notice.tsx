@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteData, getData, postData } from "../../api/fetching";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { formatUtcToLocal } from "../../utils/DateFormater";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 export interface INotification {
   title: string,
@@ -13,6 +14,7 @@ export interface INotification {
 }
 
 export default function Notice() {
+  const {role} = useContext<any>(AuthContext)
 
   const [notifications,setNotifications] = useState<INotification[]>([])
   const [isForm,setIsForm] = useState(false)
@@ -61,13 +63,18 @@ export default function Notice() {
           <h5 className="text-xl font-medium text-bodydark2">Notification</h5>
                   {/* create Button */}
         <div className="flex items-center justify-center">
-          <button 
-          onClick={() => setIsForm((state) => !state)}
-          className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10">Create New Notice</button>
+          {
+            role==='admin' && (
+              <button 
+              onClick={() => setIsForm((state) => !state)}
+              className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10">Create New Notice</button>
+            )
+          }
+
         </div>
         </div>
 {
-  isForm && (
+  isForm && role==='admin' && (
     <form onSubmit={handleSubmit(onSubmit)} >
     <div className="flex flex-col gap-5.5 p-6.5">
           <div>
@@ -115,8 +122,15 @@ export default function Notice() {
                       <div className="flex items-center justify-between">
                       <p className="text-xs font-bold text-meta-5">{formatUtcToLocal(updatedAt)}</p>
                       <div className="flex items-center justify-center gap-3">
-                        <button className="text-meta-3">Edit</button>
+                        {
+                          role ==='admin' && (
+                            <>
+                               <button className="text-meta-3">Edit</button>
                         <button onClick={()=>handleDelete(_id)} className="text-meta-1">Delete</button>
+                            </>
+                          )
+                        }
+
                       </div>
                       </div>
                     </Link>
