@@ -1,18 +1,47 @@
+import { useEffect, useState } from "react";
+import { linksTypeArr } from "../../data/data";
+import { getData } from "../../api/fetching";
+import { handleCopyClick } from "../../utils/copyToClipboard";
 
 
 const WebTable = () => {
+  const [selectedValue,setSelectedValue] = useState<String>(linksTypeArr[0].value)
+  const [links,setLinks]= useState<[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData(`sites?category=${selectedValue}`);
+        setLinks((data as any)?.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [selectedValue]);
+
+
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
        Website Urls
       </h4>
       <div className="buttons my-5 flex items-center justify-center gap-2 flex-wrap text-center">
-        <button className="inline-flex rounded items-center justify-center bg-primary px-2 py-1 text-center font-medium text-white hover:bg-opacity-90 ">Sixa</button>
-        <button className="inline-flex rounded items-center justify-center bg-bodydark2 px-2 py-1 text-center font-medium text-meta-4 hover:bg-opacity-90 ">Sixa</button>
+       
+
+
+{
+  linksTypeArr.map(({label,value}, index) =>(
+    <button key={index} className={`inline-flex rounded items-center justify-center  px-2 py-1 text-center font-medium hover:bg-opacity-90 ${value===selectedValue ? 'text-white bg-primary' : 'text-stroke bg-body'}` } value={value}
+    onClick={()=>(setSelectedValue(value))}
+    >{label}</button>
+  ))
+}
       </div>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
+        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 ">
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Website
@@ -20,48 +49,46 @@ const WebTable = () => {
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              URL
+              Category
             </h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Validity
+              Action
             </h5>
           </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-             Status
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Last Renue Date
-            </h5>
-          </div>
+
+
         </div>
 
-        <div className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-5">
+{
+  links?.map(({category,_id,siteUrl  })=>(
+<div key={_id} className="grid grid-cols-3 border-b border-stroke dark:border-strokedark ">
           <div className="flex items-center gap-3 p-2.5 xl:p-5">
 
-            <p className="hidden text-black dark:text-white sm:block">Google</p>
+            <p className="hidden text-black dark:text-white sm:block">{siteUrl
+}</p>
           </div>
 
           <div className="flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">3.5K</p>
+            <p className="text-black dark:text-white">{category}</p>
           </div>
 
           <div className="flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-meta-3">$5,768</p>
+          <button
+onClick={()=> handleCopyClick(siteUrl)}
+      
+      className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10"
+    >
+      Copy
+    </button>
           </div>
 
-          <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-            <p className="text-black dark:text-white">590</p>
-          </div>
 
-          <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-            <p className="text-meta-5">4.8%</p>
-          </div>
         </div>
+  ))
+}
+        
 
 
 

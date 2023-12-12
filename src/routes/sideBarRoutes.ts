@@ -59,9 +59,9 @@ export const sideBarAdminRoutes:Array<any> = [
         link:'/information'
     },
     {
-        title:"Paid link pending",
+        title:"Manage Websites",
         icon: GoBell,
-        link:'/notices'
+        link:'/manage_links'
     },
     {
         title:"All user",

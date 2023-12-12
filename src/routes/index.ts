@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import UserManagement from '../pages/Dashboard/subAdmin/UserManagement';
+import ManageLinks from '../pages/Dashboard/subAdmin/ManageLinks';
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
 const Information = lazy(() => import('../pages/Dashboard/Information'));
 const Shorter = lazy(() => import('../pages/Dashboard/Shorter'));
@@ -45,6 +46,11 @@ const adminRoutes = [
     path: '/users',
     title: 'users',
     component: UserManagement,
+  },
+  {
+    path: '/manage_links',
+    title: 'Manage Links',
+    component: ManageLinks,
   },
   
 ];
