@@ -74,12 +74,25 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const logOut = (e: React.SyntheticEvent) => {
+  const logOut = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    localStorage.removeItem("access_token");
-    setUser(null);
-    setToken(null);
-    window.location.href = '/signin';
+
+    try {
+     
+        const data:any = await getData(`auth/logout`);
+        if (data.status === 'success') {
+          localStorage.removeItem("access_token");
+          setUser(null);
+          setToken(null);
+          window.location.href = '/signin';
+        } 
+      }
+     
+
+     catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
   };
   
 

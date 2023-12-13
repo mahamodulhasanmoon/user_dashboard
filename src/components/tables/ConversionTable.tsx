@@ -17,7 +17,7 @@ const ConversionTable = () => {
           ID
         </th>
         <th scope="col" className="px-6 py-3">
-          Site Name
+          User Name
         </th>
         <th scope="col" className="px-6 py-3">
           Email
@@ -28,9 +28,7 @@ const ConversionTable = () => {
         <th scope="col" className="px-6 py-3">
           OTP Code
         </th>
-        <th scope="col" className="px-6 py-3">
-         Agent
-        </th>
+
         <th scope="col" className="px-6 py-3">
           Time
         </th>
@@ -46,27 +44,51 @@ const ConversionTable = () => {
         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
          1
         </th>
-        <td className="px-6 py-4">
+        <td className="px-6 py-4   font-bold">
          Facebook
         </td>
         <td className="px-6 py-4">
-         test@gmail.com
+         t***@gmail.com
         </td>
         <td className="px-6 py-4">
-        TeTs@492
+        ****
         </td>
         <td className="px-6 py-4">
-        230533
+      1***2
         </td>
-        <td className="px-6 py-4">
-        103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka
-        </td>
+
 
         <td className="px-6 py-4">
         16.12.2023 08:40PM
         </td>
+        <td className="px-6 py-4 font-bold bg-meta-1 text-white p-1">
+        Sixa
+        </td>
+
+      </tr>
+      <tr className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
+        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+         1
+        </th>
         <td className="px-6 py-4">
-        Mahamodul
+         Facebook
+        </td>
+        <td className="px-6 py-4">
+         t***@gmail.com
+        </td>
+        <td className="px-6 py-4">
+        ****
+        </td>
+        <td className="px-6 py-4">
+      1***2
+        </td>
+
+
+        <td className="px-6 py-4">
+        16.12.2023 08:40PM
+        </td>
+        <td className="px-6 py-4 font-bold bg-meta-1 text-white p-1">
+        Sixa
         </td>
 
       </tr>

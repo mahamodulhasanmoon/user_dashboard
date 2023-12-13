@@ -23,7 +23,7 @@ const WebTable = () => {
 
 
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className="  rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
        Website Urls
       </h4>
@@ -41,18 +41,19 @@ const WebTable = () => {
       </div>
 
       <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 ">
-          <div className="p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Website
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
+        <div className="grid grid-cols-12 rounded-sm bg-gray-2 dark:bg-meta-4 ">
+        <div className="p-2.5 text-center xl:p-5 col-span-2">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Category
             </h5>
           </div>
-          <div className="p-2.5 text-center xl:p-5">
+          <div className="p-2.5 xl:p-5 col-span-8">
+            <h5 className="text-sm font-medium uppercase xsm:text-base">
+              Website
+            </h5>
+          </div>
+
+          <div className="p-2.5 text-center xl:p-5 col-span-2">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
               Action
             </h5>
@@ -63,18 +64,19 @@ const WebTable = () => {
 
 {
   links?.map(({category,_id,siteUrl  })=>(
-<div key={_id} className="grid grid-cols-3 border-b border-stroke dark:border-strokedark ">
-          <div className="flex items-center gap-3 p-2.5 xl:p-5">
+<div key={_id} className="grid grid-cols-12 border-b border-stroke dark:border-strokedark ">
+<div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
+            <p className="text-black dark:text-meta-5 font-bold text-lg">{category}</p>
+          </div>
+          <div className="flex items-center gap-3 p-2.5 xl:p-5 col-span-8">
 
             <p className="hidden text-black dark:text-white sm:block">{siteUrl
 }</p>
           </div>
 
-          <div className="flex items-center justify-center p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">{category}</p>
-          </div>
 
-          <div className="flex items-center justify-center p-2.5 xl:p-5">
+
+          <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
           <button
 onClick={()=> handleCopyClick(siteUrl)}
       
