@@ -113,12 +113,32 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     socket.on('infoUpdate', () => {
       const audio = new Audio('notification.wav');
       audio.play();
+      console.log('played')
     }); 
 
     return () => {
       socket.disconnect();
     };
   }, [socket]);
+
+
+    useEffect(() => {
+      const requestNotificationPermission = async () => {
+        try {
+          await Notification.requestPermission();
+          const permission = Notification.permission;
+          if (permission === 'granted') {
+            new Notification('Permission Granted', {
+              body: 'You can now receive notifications.',
+            });
+          }
+        } catch (error) {
+          console.error('Error requesting notification permission:', error);
+        }
+      };
+  
+      requestNotificationPermission();
+    }, []);
   
   const authInfo: AuthContextProps = {
     user,

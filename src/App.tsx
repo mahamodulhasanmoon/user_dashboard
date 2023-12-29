@@ -1,7 +1,6 @@
 import { Suspense, lazy,  useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
 import Overview from './pages/Dashboard/Overview';
 import SignIn from './pages/Authentication/SignIn';
 import Loader from './common/Loader';
