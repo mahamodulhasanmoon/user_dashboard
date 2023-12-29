@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 import { AuthContext } from "../Contexts/AuthProvider";
+import Loader from "../common/Loader";
 
 const PrivateRoutes = ({ children }:any) => {
   const {user,loading} = useContext(AuthContext)
@@ -12,7 +13,7 @@ const PrivateRoutes = ({ children }:any) => {
 console.log(user,'op',loading)
   if (loading) {
     return <>
-    <h2 className="text-center text-3xl">Loading</h2>
+  <Loader />
     </>;
 }
 

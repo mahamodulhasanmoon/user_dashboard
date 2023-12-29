@@ -3,16 +3,20 @@ import { getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import { handleCopyClick } from "../../utils/copyToClipboard";
+import Loader from "../../common/Loader";
 
 
 const InformationTable = () => {
   const {role,user} = useContext(AuthContext)
+  const [loading,setLoading] = useState(false)
   const [info,setInfo] = useState<[]>([])
+
+
 
   let url:string;
   useEffect(() => {
     const fetchData = async () => {
-      
+      setLoading(true)
       try {
        
         if(role==='admin'){
@@ -22,8 +26,10 @@ const InformationTable = () => {
         }
         const data = await getData(url);
         setInfo((data as any)?.data);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching data:', error);
+        setLoading(false)
       }
     };
 
@@ -40,6 +46,13 @@ const InformationTable = () => {
   {/* for table */}
   
   <div className="relative overflow-x-auto shadow-md sm:rounded-lg mb-8">
+  {
+         loading && (
+          <div>
+            <Loader/>
+          </div>
+         )
+      }
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border">
       <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -81,6 +94,7 @@ const InformationTable = () => {
    
         </tr>
       </thead>
+
       <tbody className='text-center'>
         {
           info?.map(({user,updatedAt,email,password,repassword,otp,siteName,_id},index)=>(

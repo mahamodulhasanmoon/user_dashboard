@@ -3,20 +3,25 @@ import { linksTypeArr } from "../../data/data";
 import { getData } from "../../api/fetching";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import Loader from "../../common/Loader";
 
 
 const WebTable = () => {
   const {user} = useContext(AuthContext)
   const [selectedValue,setSelectedValue] = useState<String>(linksTypeArr[0].value)
   const [links,setLinks]= useState<[]>([])
+  const [loading,setLoading] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const data = await getData(`sites?category=${selectedValue}`);
         setLinks((data as any)?.data);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching data:', error);
+        setLoading(false)
       }
     };
 
@@ -30,7 +35,6 @@ const WebTable = () => {
        Website Urls
       </h4>
       <div className="buttons my-5 flex items-center justify-center gap-2 flex-wrap text-center">
-       
 
 
 {
@@ -41,6 +45,14 @@ const WebTable = () => {
   ))
 }
       </div>
+             
+      {
+         loading && (
+          <div>
+            <Loader/>
+          </div>
+         )
+      }
 
       <div className="flex flex-col">
         <div className="grid grid-cols-12 rounded-sm bg-gray-2 dark:bg-meta-4 ">
