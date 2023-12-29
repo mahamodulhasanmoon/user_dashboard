@@ -10,7 +10,6 @@ const PrivateRoutes = ({ children }:any) => {
   
   const { pathname } = useLocation();
 
-console.log(user,'op',loading)
   if (loading) {
     return <>
   <Loader />

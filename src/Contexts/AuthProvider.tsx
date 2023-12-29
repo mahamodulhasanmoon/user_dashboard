@@ -1,6 +1,8 @@
 import React, { createContext,  useState, ReactNode, useEffect } from "react";
 import { getData, postData } from "../api/fetching";
 import { toast } from "react-toastify";
+import { io } from "socket.io-client";
+import { socketUrl } from "../constant/environment";
 
 
 export interface User {
@@ -32,6 +34,7 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const socket = io(socketUrl);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
   const [token, setToken] = useState<string | null>(null);
@@ -97,8 +100,26 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
 
   };
+
+  // socket Connections
+  useEffect(() => {
+    const userId = user?._id
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+    socket.emit('joinRoom', userId);
+
+    socket.on('infoUpdate', () => {
+      const audio = new Audio('notification.wav');
+      audio.play();
+    }); 
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [socket]);
   
-  console.log(user);
   const authInfo: AuthContextProps = {
     user,
     loading,
