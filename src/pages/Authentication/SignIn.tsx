@@ -1,7 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import LogoDark from '../../images/logo/logo-dark.svg';
 import svgImg from '../../images/svg/login.svg';
-import Logo from '../../images/logo/logo.svg';
 import { CiLock, CiMail } from 'react-icons/ci';
 import { useForm } from 'react-hook-form';
 import { useContext, useEffect } from 'react';
@@ -42,19 +40,17 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className="rounded-sm  min-h-[101vh] m-0 p-0  text-white shadow-default bg-black">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
-              <Link className="mb-5.5 inline-block" to="/">
-                <img className="hidden dark:block" src={Logo} alt="Logo" />
-                <img className="dark:hidden" src={LogoDark} alt="Logo" />
+              <Link className="mb-5.5 inline-block text-3xl font-bold" to="/">
+                {/* <img className="hidden dark:block" src={Logo} alt="Logo" />
+                <img className="dark:hidden" src={LogoDark} alt="Logo" /> */}
+                Update Links Dashboard
               </Link>
 
-              <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
-              </p>
+           
 
               <span className="mt-15 inline-block">
                 <img src={svgImg} alt="" />
@@ -64,7 +60,7 @@ const SignIn = () => {
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+              <h2 className="mb-9 text-2xl font-bold text-white dark:text-white sm:text-title-xl2">
                Wellcome To User Dashboard
               </h2>
               <span className="mb-5 block font-medium text-center">Login System For Premium Account</span>

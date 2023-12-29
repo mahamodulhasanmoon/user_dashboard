@@ -1,5 +1,5 @@
 import userThree from '../../images/user/user-03.png';
-import fireToast from '../../hooks/fireToast';
+// import fireToast from '../../hooks/fireToast';
 
 const Settings = () => {
   
@@ -156,7 +156,7 @@ const Settings = () => {
                     <button
                       className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:shadow-1"
                       type="submit"
-                      onClick={fireToast}
+                      // onClick={fireToast}
                     >
                       Update
                     </button>

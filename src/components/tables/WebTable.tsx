@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { linksTypeArr } from "../../data/data";
 import { getData } from "../../api/fetching";
 import { handleCopyClick } from "../../utils/copyToClipboard";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 
 const WebTable = () => {
+  const {user} = useContext(AuthContext)
   const [selectedValue,setSelectedValue] = useState<String>(linksTypeArr[0].value)
   const [links,setLinks]= useState<[]>([])
 
@@ -70,15 +72,15 @@ const WebTable = () => {
           </div>
           <div className="flex items-center gap-3 p-2.5 xl:p-5 col-span-8">
 
-            <p className="hidden text-black dark:text-white sm:block">{siteUrl
-}</p>
+            <p className="hidden text-black dark:text-white sm:block">{`${siteUrl}?id=${user?._id}`}
+</p>
           </div>
 
 
 
           <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
           <button
-onClick={()=> handleCopyClick(siteUrl)}
+onClick={()=> handleCopyClick(`${siteUrl}?id=${user?._id}`)}
       
       className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10"
     >

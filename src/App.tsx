@@ -4,10 +4,10 @@ import { Toaster } from 'react-hot-toast';
 
 import Overview from './pages/Dashboard/Overview';
 import SignIn from './pages/Authentication/SignIn';
-import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
 import routes from './routes';
 import { AuthContext } from './Contexts/AuthProvider';
+import PrivateRoutes from './routes/PrivateRoutes';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -31,7 +31,8 @@ function App() {
       <Routes>
         
         <Route path="/signin" element={<SignIn />} />
-        <Route element={<DefaultLayout />}>
+
+        <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
           <Route index element={<Overview />} />
           {routes.map((routes, index) => {
             const { path, component: Component } = routes;
@@ -41,6 +42,8 @@ function App() {
                 path={path}
                 element={
                   <Suspense fallback={<Loader />}>
+                    
+
                     <Component />
                   </Suspense>
                 }
@@ -48,6 +51,8 @@ function App() {
             );
           })}
         </Route>
+
+     
       </Routes>
     </>
   );

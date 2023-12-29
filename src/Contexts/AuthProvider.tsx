@@ -39,6 +39,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+     
     
       try {
         if(localStorage.getItem('access_token')){
@@ -49,12 +50,14 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             setUser(data?.data);
             setLoading(false);
           } else {
+            setLoading(false)
             toast.error("something went wrong");
           }
         }
-       
+        setLoading(false)
 
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching data:", error);
       }
     };
@@ -95,7 +98,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   };
   
-
+  console.log(user);
   const authInfo: AuthContextProps = {
     user,
     loading,
