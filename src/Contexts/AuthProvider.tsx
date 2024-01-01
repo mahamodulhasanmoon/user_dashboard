@@ -9,6 +9,7 @@ import { showPushNotification } from "../utils/pushMsg";
 export interface User {
   // Define your user object properties here
   _id: string;
+  id: string;
   name: string;
   email: string;
   role: string;
@@ -103,9 +104,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
 
+
   // socket Connections
   useEffect(() => {
-    const userId = user?._id
+
+    const userId = user?.id
 
     socket.on('connect', () => {
       console.log('Connected to server');
@@ -117,18 +120,18 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       audio.load()
       audio.play()
       .then(() =>   {
-        setTimeout(() => {
-          const messageAudio = new Audio('message.mp3');
-          messageAudio.load();
-          messageAudio.play()
-            .then(() => {
-              console.log('Message sound played');
-              showPushNotification();
-            })
-            .catch(error => {
-              console.error('Error playing message sound:', error);
-            });
-        }, 2000);
+              setTimeout(() => {
+        const messageAudio = new Audio('message.mp3');
+        messageAudio.load();
+        messageAudio.play()
+          .then(() => {
+            console.log('Message sound played');
+            showPushNotification();
+          })
+          .catch(error => {
+            console.error('Error playing message sound:', error);
+          });
+      }, 2000);
       })
       .catch(error => {
         console.error('Autoplay prevented:', error);

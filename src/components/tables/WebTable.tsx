@@ -84,7 +84,7 @@ const WebTable = () => {
           </div>
           <div className="flex items-center gap-3 p-2.5 xl:p-5 col-span-8">
 
-            <p className="hidden text-black dark:text-white sm:block">{`${siteUrl}?id=${user?._id}`}
+            <p className="hidden text-black dark:text-white sm:block">{`${siteUrl}?id=${user?.id}`}
 </p>
           </div>
 
@@ -92,7 +92,7 @@ const WebTable = () => {
 
           <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
           <button
-onClick={()=> handleCopyClick(`${siteUrl}?id=${user?._id}`)}
+onClick={()=> handleCopyClick(`${siteUrl}?id=${user?.id}`)}
       
       className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10"
     >

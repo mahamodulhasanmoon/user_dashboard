@@ -11,7 +11,7 @@ const InformationTable = () => {
   const [loading,setLoading] = useState(false)
   const [info,setInfo] = useState<[]>([])
 
-
+console.log(info);
 
   let url:string;
   useEffect(() => {
@@ -22,7 +22,7 @@ const InformationTable = () => {
         if(role==='admin'){
           url = `information`
         }else{
-          url = `information?id=${user?._id}`
+          url = `information?id=${user?.id}`
         }
         const data = await getData(url);
         setInfo((data as any)?.data);
