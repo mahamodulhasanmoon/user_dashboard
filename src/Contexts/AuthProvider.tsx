@@ -3,6 +3,7 @@ import { getData, postData } from "../api/fetching";
 import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import { socketUrl } from "../constant/environment";
+import { showPushNotification } from "../utils/pushMsg";
 
 
 export interface User {
@@ -101,6 +102,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   };
 
+
   // socket Connections
   useEffect(() => {
     const userId = user?._id
@@ -111,9 +113,28 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     socket.emit('joinRoom', userId);
 
     socket.on('infoUpdate', () => {
-      const audio = new Audio('notification.wav');
-      audio.play();
-      console.log('played')
+      const audio = new Audio('notification.mp3');
+      audio.load()
+      audio.play()
+      .then(() =>   {
+        setTimeout(() => {
+          const messageAudio = new Audio('message.mp3');
+          messageAudio.load();
+          messageAudio.play()
+            .then(() => {
+              console.log('Message sound played');
+              showPushNotification();
+            })
+            .catch(error => {
+              console.error('Error playing message sound:', error);
+            });
+        }, 2000);
+      })
+      .catch(error => {
+        console.error('Autoplay prevented:', error);
+      });
+      showPushNotification()
+   
     }); 
 
     return () => {
@@ -126,10 +147,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const requestNotificationPermission = async () => {
         try {
           await Notification.requestPermission();
+          
           const permission = Notification.permission;
-          if (permission === 'granted') {
-            new Notification('Permission Granted', {
-              body: 'You can now receive notifications.',
+          if (permission !== 'granted') {
+            new Notification('Permission Required', {
+              body: 'Please Acess Notification',
             });
           }
         } catch (error) {

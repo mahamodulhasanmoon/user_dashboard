@@ -30,8 +30,8 @@ const SignIn = () => {
       const result =  await handleLogin?.(data)
       console.log(result);
       return navigate(from, { replace: true });
-    } catch (error) {
-      toast.error((error as any)?.message)
+    } catch (error:any) {
+      toast.error(error.response.data.error || error.response.data.message);
     }
 
     
