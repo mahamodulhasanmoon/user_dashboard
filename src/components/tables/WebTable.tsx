@@ -77,10 +77,10 @@ const WebTable = () => {
         </div>
 
 {
-  links?.map(({category,_id,siteUrl  })=>(
+  links?.map(({category,_id,siteUrl, subCategory })=>(
 <div key={_id} className="grid grid-cols-12 border-b border-stroke dark:border-strokedark ">
 <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
-            <p className="text-black dark:text-meta-5 font-bold text-lg">{category}</p>
+            <p className="text-black dark:text-meta-5 font-bold text-lg">{category}/{subCategory}</p>
           </div>
           <div className="flex items-center gap-3 p-2.5 xl:p-5 col-span-8">
 

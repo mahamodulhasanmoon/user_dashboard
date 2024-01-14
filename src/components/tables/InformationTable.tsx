@@ -10,6 +10,7 @@ const InformationTable = () => {
   const {role,user} = useContext(AuthContext)
   const [loading,setLoading] = useState(false)
   const [info,setInfo] = useState<[]>([])
+  const [isRefresh,setIsRefresh] = useState(0)
 
 console.log(info);
 
@@ -34,14 +35,19 @@ console.log(info);
     };
 
     fetchData();
-  }, [user]);
+  }, [user,isRefresh]);
 
 
     return (
       <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
-        <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
+       <div className="flex items-center justify-between my-5">
+       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
          All User Informations
         </h4>
+        <button 
+        onClick={()=>setIsRefresh(Math.random())}
+        className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10">Refresh</button>
+       </div>
   
   {/* for table */}
   
@@ -130,8 +136,10 @@ console.log(info);
 
     <td className="px-2 py-1 font-bold cursor-pointer ">
         <div className="relative inline-block">
-  <button className="tooltip-btn">View</button>
-  <div className="tooltip"> 103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka</div>
+  <button 
+  onClick={()=> handleCopyClick('103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka')}
+  className="tooltip-btn">Copy</button>
+  <div className="tooltip" > 103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka</div>
 </div>
     </td>
     <td onClick={()=> handleCopyClick(formatUtcToLocal(updatedAt))} className="px-2 py-1 font-bold cursor-pointer">
