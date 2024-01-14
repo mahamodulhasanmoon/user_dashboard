@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import CountComp from './CountComp';
 
+
 interface Subscription {
   status: 'free' | 'trial' | 'paid' | 'expired';
   startDate?: string;
@@ -90,11 +91,16 @@ function Status() {
       );
     } else if (subscriptionStatus === 'expired') {
       return (
-        <div className='flex items-center justify-center'>
+        <div>
+           <div className='flex items-center justify-center'>
           <p>Account Validation has expired.</p> 
           <button className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Renuew Now</button>
+          
+        </div>
+
 
         </div>
+       
       );
     } else {
       return (

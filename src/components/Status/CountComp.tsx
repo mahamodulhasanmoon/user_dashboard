@@ -1,5 +1,6 @@
 // Import necessary modules from React and Tailwind CSS
 
+
 // Countdown component with animation
 const CountComp = ({ hours, minutes, seconds, days }: any) => {
   return (
@@ -29,6 +30,7 @@ const CountComp = ({ hours, minutes, seconds, days }: any) => {
     </span>
     sec
   </div>
+
 </div>
   );
 };
