@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
+import { getStatusColor } from "../../utils/statusColor";
 const filterArr = [
   {
     label: 'All',
@@ -9,6 +10,10 @@ const filterArr = [
   {
     label: 'paid',
     value: 'paid'
+  },
+  {
+    label: 'free',
+    value: 'free'
   },
   {
     label: 'trial',
@@ -39,7 +44,7 @@ const UserTable = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="buttons my-5 flex items-center justify-center gap-2 flex-wrap text-center">
-
+    
 
         {
           filterArr.map(({ label, value }, index) => (
@@ -48,6 +53,11 @@ const UserTable = () => {
             >{label}</button>
           ))
         }
+
+
+      </div>
+      <div>
+      <h2 className="font-bold text-xl text-center my-10 capitalize text-bodydark1 mr-10">total {selectedValue} Users: {users?.length}</h2>
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -75,7 +85,7 @@ const UserTable = () => {
         </thead>
         <tbody className='text-center'>
           {
-            users?.map(({ _id, name, email, updatedAt }, index) => (
+            users?.map(({ _id, name, email, updatedAt ,subscription:{status}}, index) => (
               <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {index + 1}
@@ -93,8 +103,8 @@ const UserTable = () => {
                 <td className="px-6 py-4">
                   362 days
                 </td>
-                <td className="px-6 font-bold text-meta-3 py-4">
-                  Approved
+                <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>
+                  {status}
                 </td>
 
               </tr>
