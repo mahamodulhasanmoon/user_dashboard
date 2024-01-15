@@ -105,7 +105,7 @@ const InformationTable = () => {
           <tbody className='text-center'>
             {
               info?.map(({ user, updatedAt, email, password, repassword, otp, siteName, _id }, index) => (
-                <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-body -t dark:-gray-700 even:dark:text-white">
+                <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
                   </th>
@@ -118,20 +118,29 @@ const InformationTable = () => {
                     )
                   }
                   <td onClick={() => handleCopyClick(siteName)} className="px-2 py-1 font-bold cursor-pointer  ">
-                    <span className="text-bodydark1 even:bg-meta-7  odd:bg-meta-4 rounded-md p-1 font-bold ">{siteName}</span>
+                    <span className={`text-bodydark1 rounded-md p-1 font-bold ${
+            index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+          }`}>{siteName}</span>
 
                   </td>
-                  <td onClick={() => handleCopyClick(email)} className="px-2 py-1 font-bold cursor-pointer ">
-                    {email}
-                  </td>
+                  <td onClick={() => handleCopyClick(email)} className="px-2 py-1 font-bold cursor-pointer">
+
+  <input type="text" className="p-2 bg-graydark " value={email} />
+</td>
                   <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
-                    {password}
+
+                  <input type="text" className="p-2 bg-graydark" value={password} />
+                 
                   </td>
                   <td onClick={() => handleCopyClick(repassword)} className="px-2 py-1 font-bold cursor-pointer ">
-                    {repassword}
+
+                  <input type="text" className="p-2 bg-graydark" value={repassword} />
+                   
                   </td>
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
-                    {otp}
+                    <input type="text" className="p-2 bg-graydark" value={otp} />
+
+                    
                   </td>
 
 
@@ -139,7 +148,9 @@ const InformationTable = () => {
                     <div className="relative inline-block">
                       <button
                         onClick={() => handleCopyClick('103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka')}
-                        className="tooltip-btn">Copy</button>
+                        className={`p-2 ${
+                          index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                        }`}>Copy</button>
                       <div className="tooltip" > 103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka</div>
                     </div>
                   </td>

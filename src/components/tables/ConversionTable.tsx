@@ -67,8 +67,11 @@ const ConversionTable = () => {
           <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
            {index + 1}
           </th>
-          <td className="px-6 py-4   font-bold">
-          {name &&(name as string)?.split('').slice(0, 4).join('') + '*****'}
+          <td className="px-6 py-4   font-bold ">
+      
+          <span className={`text-bodydark1 rounded-md p-1 font-bold ${
+            index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+          }`}>    {name}</span>
           </td>
           <td className="px-6 py-4">
           
@@ -86,7 +89,9 @@ const ConversionTable = () => {
           {formatUtcToLocal(updatedAt)}
           </td>
    
-          <td className="px-2 py-1 font-bold cursor-pointer  "><span className="text-bodydark1 even:bg-meta-7  odd:bg-meta-4 rounded-md p-1 font-bold ">  {siteName}</span></td>
+          <td className="px-2 py-1 font-bold cursor-pointer  "><span className={`text-bodydark1 rounded-md p-1 font-bold ${
+            index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+          }`}>  {siteName}</span></td>
          
       
          
