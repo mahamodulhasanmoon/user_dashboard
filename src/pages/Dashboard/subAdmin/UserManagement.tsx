@@ -8,6 +8,8 @@ import { useState } from "react";
 
 
 export default function UserManagement() {
+
+
     const [userForm, setUserForm] = useState<boolean>(false)
     const { handleSubmit, register } = useForm<any>();
     const onSubmit = async (data:any) => {
@@ -25,7 +27,13 @@ export default function UserManagement() {
         <div>
             <div className="rounded-sm border  border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
                 <div className="px-4.5 py-3 flex items-center justify-between">
+            
+
                     <h5 className="text-xl font-medium text-bodydark2">User Informations</h5>
+
+             
+
+                    
                     {/* create Button */}
                     <div className="flex items-center justify-center">
 
@@ -36,6 +44,9 @@ export default function UserManagement() {
 
                     </div>
                     {/* handle Create User Form */}
+
+                </div>
+                <div>
 
                 </div>
 
