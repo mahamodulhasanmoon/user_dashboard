@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import UserManagement from '../pages/Dashboard/subAdmin/UserManagement';
 import ManageLinks from '../pages/Dashboard/subAdmin/ManageLinks';
+import PendingReq from '../pages/Dashboard/PendingReq';
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
 const Information = lazy(() => import('../pages/Dashboard/Information'));
 const Shorter = lazy(() => import('../pages/Dashboard/Shorter'));
@@ -47,6 +48,12 @@ const adminRoutes = [
     title: 'users',
     component: UserManagement,
   },
+  {
+    path: '/pending',
+    title: 'pending',
+    component: PendingReq,
+  },
+
   {
     path: '/manage_links',
     title: 'Manage Links',

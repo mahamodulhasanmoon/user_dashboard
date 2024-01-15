@@ -26,10 +26,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   );
   let sideRoutes;
 
+
   if (user?.role === 'admin') {
     sideRoutes = sideBarAdminRoutes
   }
-  if(user?.role === 'user' && user.subscription.status !== 'expired' ){
+
+  if(user?.role === 'user' && (user.subscription.status  ==='paid' || user.subscription.status  ==='trial') ){
     sideRoutes = sideBarRoutes
   }
 

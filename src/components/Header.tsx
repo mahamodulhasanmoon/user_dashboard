@@ -4,6 +4,8 @@ import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 import Status from './Status/Status';
+import { useContext } from 'react';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 
 
@@ -11,13 +13,18 @@ const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
-
+const {user}= useContext(AuthContext)
  
  
   return (
     <header className="sticky top-0 z-999 flex w-full items-center justify-between bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className='flex items-center justify-center w-1/2'>
-      <Status/>
+        {
+user?.role !== 'admin' && (
+
+  <Status/>
+)
+        }
       </div>
       <div className="flex flex-grow items-center justify-end py-4 px-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">

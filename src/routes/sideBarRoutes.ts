@@ -27,30 +27,6 @@ export const sideBarRoutes:Array<any> = [
     }
 ];
 
-export const sideBarSubAdminRoutes:Array<any> = [
-
-    {
-        title:"Information",
-        icon: HiInformationCircle,
-        link:'/information'
-    },
-    {
-        title:"Shortener",
-        icon: CiLink,
-        link:'/shorter'
-    },
-    {
-        title:"Websites",
-        icon: CgWebsite,
-        link:'/web_links'
-    },
-    {
-        title:"Notice",
-        icon: GoBell,
-        link:'/notices'
-    }
-];
-
 export const sideBarAdminRoutes:Array<any> = [
 
     {
@@ -67,6 +43,11 @@ export const sideBarAdminRoutes:Array<any> = [
         title:"All user",
         icon: GoPerson,
         link:'/users'
+    },
+    {
+        title:"Pending Requests",
+        icon: GoPerson,
+        link:'/pending'
     },
     {
         title:"Shortener",

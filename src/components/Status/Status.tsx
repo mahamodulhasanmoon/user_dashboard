@@ -3,6 +3,7 @@ import { AuthContext } from '../../Contexts/AuthProvider';
 import CountComp from './CountComp';
 
 
+
 interface Subscription {
   status: 'free' | 'trial' | 'paid' | 'expired';
   startDate?: string;
@@ -14,7 +15,8 @@ interface UserData {
 }
 
 function Status() {
-  const { user } = useContext(AuthContext);
+
+  const { user,setShowModal } = useContext(AuthContext);
   const [subscriptionStatus, setSubscriptionStatus] = useState<Subscription['status']>('free');
   const [countdown, setCountdown] = useState<React.ReactNode>('00 days : 00 hours : 00 minutes : 00 seconds');
 
@@ -86,7 +88,6 @@ function Status() {
             <p>{countdown} </p>
 
           </div>
-          <h1 className='text-[#2cb13c] font-bold text-xl'>Left</h1>
         </div>
       );
     } else if (subscriptionStatus === 'expired') {
@@ -94,7 +95,9 @@ function Status() {
         <div>
            <div className='flex items-center justify-center'>
           <p>Account Validation has expired.</p> 
-          <button className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Renuew Now</button>
+          <button 
+          onClick={() => setShowModal(true)}
+          className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Renuew Now</button>
           
         </div>
 
@@ -105,7 +108,7 @@ function Status() {
     } else {
       return (
         <div>
-          {/* Add default content when subscription status is 'free' or other unrecognized values */}
+          <p className='text-[#ff0000] font-bold'>Your Account Is Now Under Review Please wait 2 to 12 hour</p>
         </div>
       );
     }
@@ -113,7 +116,7 @@ function Status() {
 
   return (
     <div className='flex items-center justify-center gap-5'>
-      <h1 className='text-[#2cb13c] font-bold text-xl'> {subscriptionStatus === 'trial' && 'Free Trial' || subscriptionStatus}</h1>
+      {/* <h1 className='text-[#2cb13c] font-bold text-xl'> {subscriptionStatus === 'trial' && 'Free Trial' || subscriptionStatus}</h1> */}
       {renderContent()}
 
     </div>

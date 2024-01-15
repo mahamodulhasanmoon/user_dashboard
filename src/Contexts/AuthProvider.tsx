@@ -21,11 +21,13 @@ export interface AuthContextProps {
   logOut?: (e: React.SyntheticEvent) => void;
   user?: User | null | undefined;
   loading?: boolean;
+  showModal?: any;
   token?: string | null;
   role?: string | null;
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
+  setShowModal?:React.Dispatch<React.SetStateAction<any>>;
   handleLogin?: (data: any) => Promise<User>; // You might want to replace 'any' with the actual type of your login data
 }
 
@@ -37,6 +39,7 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const socket = io(socketUrl);
+  const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
   const [token, setToken] = useState<string | null>(null);
@@ -174,7 +177,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser,
     handleLogin,
     logOut,
-    role
+    role,
+    showModal,
+    setShowModal
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
