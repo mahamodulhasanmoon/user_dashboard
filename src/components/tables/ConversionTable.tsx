@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Contexts/AuthProvider";
+import {  useEffect, useState } from "react";
+
 import { getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 
