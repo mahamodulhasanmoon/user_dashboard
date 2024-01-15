@@ -103,9 +103,15 @@ const UserTable = () => {
                 <td className="px-6 py-4">
                   362 days
                 </td>
+                
                 <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>
-                  {status}
-                </td>
+               
+                {status === 'expired' ?
+                <button className="bg-primary text-white px-3 py-1">Delete  User</button>
+                : status}
+              </td>
+                
+
 
               </tr>
             ))
