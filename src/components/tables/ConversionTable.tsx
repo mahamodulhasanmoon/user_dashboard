@@ -1,26 +1,10 @@
-import {  useEffect, useState } from "react";
 
-import { getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
+import useInformation from "../../hooks/useInformation";
 
 
 const ConversionTable = () => {
-  const [info,setInfo]= useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-
-      
-        const data = await getData('information');
-        setInfo((data as any)?.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const {info}= useInformation({route:'/overview'})
 
   return (
     <div className="rounded-sm border  border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">

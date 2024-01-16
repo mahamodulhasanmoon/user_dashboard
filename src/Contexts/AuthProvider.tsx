@@ -45,6 +45,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
      
@@ -113,12 +115,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const userId = user?.id
 
-    socket.on('connect', () => {
-      console.log('Connected to server');
-    });
     socket.emit('joinRoom', userId);
 
     socket.on('infoUpdate', () => {
+     
       const audio = new Audio('notification.mp3');
       audio.load()
       audio.play()

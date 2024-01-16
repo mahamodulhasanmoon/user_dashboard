@@ -42,7 +42,6 @@ export async function deleteData<T>(endpoint: string): Promise<T> {
 
 export async function updateData<T>(endpoint: string, data: any): Promise<T> {
   try {
-    console.log(data);
     const response: AxiosResponse<T> = await axiosInstance.patch<T>(`${endpoint}`, data);
     return response?.data;
   } catch (error) {
