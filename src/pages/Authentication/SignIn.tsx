@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CiLock, CiMail } from 'react-icons/ci';
 import { useForm } from 'react-hook-form';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 import toast from 'react-hot-toast';
@@ -11,6 +11,8 @@ interface LoginData{
   password: string;
 }
 const SignIn = () => {
+  const [loading,setLoading]= useState(false)
+
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
   const {handleLogin,user}:AuthContextProps = useContext(AuthContext)
   const navigate = useNavigate()
@@ -27,10 +29,12 @@ const SignIn = () => {
 
   const onSubmit = async (data:LoginData) => {
     try {
-      const result =  await handleLogin?.(data)
-      console.log(result);
+      setLoading(true)
+        await handleLogin?.(data)
+        setLoading(false)
       return navigate(from, { replace: true });
     } catch (error:any) {
+      setLoading(false)
       toast.error(error.response.data.error || error.response.data.message);
     }
 
@@ -97,7 +101,7 @@ const SignIn = () => {
       <div className="mb-5">
         <input
           type="submit"
-          value="Login"
+          value={loading ? 'Loading...' : 'Login'}
           className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
         />
       </div>

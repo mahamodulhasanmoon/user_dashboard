@@ -4,7 +4,7 @@ import useInformation from "../../hooks/useInformation";
 
 
 const ConversionTable = () => {
-  const {info}= useInformation({route:'/overview'})
+  const {displayInfo}= useInformation({route:'/overview'})
 
   return (
     <div className="rounded-sm border  border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -46,7 +46,7 @@ const ConversionTable = () => {
     <tbody className='text-center'>
 
       {
-        info?.map(({ user:{name}, updatedAt, email, password,  otp, siteName},index)=>(
+        displayInfo?.map(({ user:{name}, updatedAt, email, password,  otp, siteName},index)=>(
           <tr key={index} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
           <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
            {index + 1}

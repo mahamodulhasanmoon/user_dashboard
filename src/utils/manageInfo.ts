@@ -1,4 +1,9 @@
-export function manageCount(info: any) {
+export function manageCount(infoData: any) {
+
+
+
+
+ let info = infoData.filter((item:any) => "email" in item);
     const today = new Date();
     const todayFormatted = today.toISOString().split('T')[0];
     const yesterday = new Date(today);
@@ -13,6 +18,14 @@ export function manageCount(info: any) {
       const currentMonthYear = todayFormatted.slice(0, 7);
       return itemMonthYear === currentMonthYear;
     }).length;
+    // total Click Count
+    const totalClick = infoData.filter((item: any) => {
+      const itemMonthYear = (item as any).createdAt.split('T')[0].slice(0, 7);
+      const currentMonthYear = todayFormatted.slice(0, 7);
+      return itemMonthYear === currentMonthYear;
+    }).length;
+
+
   
     const todayIncrementPercentage =  parseFloat((Math.max(Math.min(((todayDataLength - yesterdayDataLength) / yesterdayDataLength) * 100, 100), -100)).toFixed(2))
       
@@ -21,6 +34,9 @@ export function manageCount(info: any) {
      
   
     const totalIncrementPercentage =  parseFloat((Math.max(Math.min(((todayDataLength - totalDataLength) / totalDataLength) * 100, 100), -100)).toFixed(2))
+ 
+
+    const averageLeadData =  parseFloat((Math.max(Math.min(( totalDataLength/totalClick ) * 100, 100), -100)).toFixed(2))
      
   
     return {
@@ -29,7 +45,10 @@ export function manageCount(info: any) {
       thisMonthDataLength,
       totalIncrementPercentage,
       todayIncrementPercentage,
-      yesterdayIncrementPercentage
+      yesterdayIncrementPercentage,
+      totalClick,
+      averageLeadData,
+      
     };
   }
   

@@ -45,11 +45,16 @@ export default function Shorter() {
         </h3>
         <div className="flex flex-col gap-5.5 p-6.5">
           <div className="flex">
+          <select className='rounded-tl-lg rounded-bl-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary' name="" id="">
+            <option value="select One">select One</option>
+            <option value="select One">mega.xyz</option>
+            <option value="select One">megs.xyz</option>
+          </select>
             <input
               type="text"
               onChange={(e) => setfullUrls(e.target.value)}
               placeholder="Paste Your Website URL"
-              className="w-[84%]  rounded-tl-lg rounded-bl-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="w-[60%]   border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
 
             <button

@@ -12,6 +12,10 @@ const filterArr = [
     value: 'paid'
   },
   {
+    label: 'pending',
+    value: 'pending'
+  },
+  {
     label: 'free',
     value: 'free'
   },
@@ -85,7 +89,7 @@ const UserTable = () => {
         </thead>
         <tbody className='text-center'>
           {
-            users?.map(({ _id, name, email, updatedAt ,subscription:{status}}, index) => (
+            users?.map(({ _id, name, email, updatedAt, subscription:{status,endDate}}, index) => (
               <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {index + 1}
@@ -101,7 +105,7 @@ const UserTable = () => {
                   {formatUtcToLocal(updatedAt)}
                 </td>
                 <td className="px-6 py-4">
-                  362 days
+                  {endDate}
                 </td>
                 
                 <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>

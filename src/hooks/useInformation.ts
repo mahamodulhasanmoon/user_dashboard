@@ -15,7 +15,7 @@ export default function useInformation(acceptedRoutes?: any) {
       title: 'Total Hits',
       icon: GoGraph,
       total: 0,
-      overviewInPercent: 1.3,
+      overviewInPercent: 100,
     },
     {
       title: 'Today Data',
@@ -40,6 +40,7 @@ export default function useInformation(acceptedRoutes?: any) {
   const { role, user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState<[]>([]);
+  const [displayInfo,setDisplayInfo] = useState<[]>([]);
   const [isRefresh, setIsRefresh] = useState(0);
 
   let url: string;
@@ -54,21 +55,27 @@ export default function useInformation(acceptedRoutes?: any) {
         }
         const data = await getData(url);
         setInfo((data as any)?.data);
+        setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
         setLoading(false);
         const { 
             yesterdayDataLength,
             todayDataLength,
             thisMonthDataLength,
-            totalIncrementPercentage,
             todayIncrementPercentage,
-            yesterdayIncrementPercentage
+            yesterdayIncrementPercentage,
+            totalClick,
+            averageLeadData
+            
+           
              } =
           manageCount((data as any)?.data);
+          
+      
         setClickData((prevClickData) => [
           {
             ...prevClickData[0],
-            total: 0,
-            overviewInPercent:0
+            total: totalClick,
+            overviewInPercent:100
           },
           {
             ...prevClickData[1],
@@ -83,7 +90,7 @@ export default function useInformation(acceptedRoutes?: any) {
           {
             ...prevClickData[3],
             total: thisMonthDataLength,
-            overviewInPercent: totalIncrementPercentage,
+            overviewInPercent: averageLeadData,
           },
         ]);
       } catch (error) {
@@ -115,14 +122,30 @@ export default function useInformation(acceptedRoutes?: any) {
           return [data, ...prevInfo];
         }
       });
+      setDisplayInfo((prevInfo: any) => {
+        const emailExistsInData = (data as any)?.data?.some((item: any) => "email" in item);
+        if (objectIndex !== -1) {
+          if (!emailExistsInData) {
+            return prevInfo;
+          }
+          return prevInfo.map((obj: any, index: any) =>
+            index === objectIndex ? data : obj,
+          );
+        } else {
+          if (!emailExistsInData) {
+            return prevInfo;
+          }
+          return [data, ...prevInfo];
+        }
+      });
 
       // Update state with the calculated values
-      const { yesterdayDataLength, todayDataLength, thisMonthDataLength } =
+      const { yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,averageLeadData } =
         manageCount(info);
       setClickData((prevClickData) => [
         {
           ...prevClickData[0],
-          total: 0,
+          total: totalClick,
         },
         {
           ...prevClickData[1],
@@ -135,6 +158,7 @@ export default function useInformation(acceptedRoutes?: any) {
         {
           ...prevClickData[3],
           total: thisMonthDataLength,
+            overviewInPercent: averageLeadData,
         },
       ]);
     });
@@ -145,6 +169,7 @@ export default function useInformation(acceptedRoutes?: any) {
 
   return {
     info,
+    displayInfo,
     loading,
     setIsRefresh,
     role,
