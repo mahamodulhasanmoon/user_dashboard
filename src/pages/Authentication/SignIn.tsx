@@ -110,7 +110,7 @@ const SignIn = () => {
       <p className='text-center'>Not Have any Account?
       </p>
 <div className='flex w-full mt-5'>
-<Link to='/free_trial' className='w-full text-center cursor-pointer rounded-lg border border-[#2CB13C] bg-[#2CB13C] p-4 text-white transition hover:bg-opacity-90'>7 Days Free Trial</Link>
+<Link to='/free_trial' className='w-full text-center cursor-pointer rounded-lg border border-[#2CB13C] bg-[#2CB13C] p-4 text-white transition hover:bg-opacity-90'>10 Minutes Free Trial</Link>
 </div>
 <p className='text-center  mt-5'>Forget Password? <Link className='text-primary' to='/reset-password'>Reset Password</Link>
       </p>
