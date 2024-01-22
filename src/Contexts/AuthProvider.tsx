@@ -28,7 +28,8 @@ export interface AuthContextProps {
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
   setShowModal?:React.Dispatch<React.SetStateAction<any>>;
-  handleLogin?: (data: any) => Promise<User>; // You might want to replace 'any' with the actual type of your login data
+  handleLogin?: (data: any) => Promise<User>;
+  handleVerify?: (data: any) => Promise<any>; 
 }
 
 export const AuthContext = createContext<AuthContextProps | any>(null);
@@ -85,6 +86,21 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // reset(); 
       return response;
     }
+  };
+
+  // verify Email
+
+  const handleVerify = async (data: any) => {
+    console.log(data);
+    // const response:any = await postData("/auth/login", data);
+    // localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
+    // setToken(response?.data?.token);
+    // setUser(response?.data?.user);
+    // if (response?.status === 200) {
+    //   toast.success("Successfully logged in");
+    //   // reset(); 
+    //   return response;
+    // }
   };
 
   const logOut = async (e: React.SyntheticEvent) => {
@@ -179,7 +195,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     logOut,
     role,
     showModal,
-    setShowModal
+    setShowModal,
+    handleVerify
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

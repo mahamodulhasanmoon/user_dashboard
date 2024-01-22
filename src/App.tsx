@@ -7,6 +7,7 @@ import Loader from './common/Loader';
 import routes from './routes';
 import PrivateRoutes from './routes/PrivateRoutes';
 import SignUp from './pages/Authentication/SignUp';
+import VerifyOTP from './pages/Authentication/VerifyOTP';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/free_trial" element={<SignUp />} />
         <Route path="/reset-password" element={<SignUp />} />
+        <Route path="/verify_otp" element={<VerifyOTP />} />
 
         <Route element={<PrivateRoutes><DefaultLayout /></PrivateRoutes> }>
           <Route index element={<Overview />} />
