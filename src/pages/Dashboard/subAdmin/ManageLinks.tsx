@@ -3,7 +3,7 @@
 import toast from "react-hot-toast";
 import { postData } from "../../../api/fetching";
 import { useForm } from "react-hook-form";
-import { linksTypeArr } from "../../../data/data";
+import { categoryLinkArr, linksTypeArr } from "../../../data/data";
 
 
 
@@ -38,11 +38,11 @@ export default function UserManagement() {
 
                 {/* gender */}
                 <label className="mt-3 block text-black dark:text-white">
-                  Category
+                 Sites
                 </label>
                 <select
       className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-      {...register('category')}
+      {...register('sites')}
     >
               <option disabled selected>
           choose one
@@ -55,15 +55,26 @@ export default function UserManagement() {
       ))}
     </select>
 
-    <label className="mt-3 block text-black dark:text-white">
-                  Link Type
+
+{/* Link Types */}
+
+<label className="mt-3 block text-black dark:text-white">
+                 Category
                 </label>
-                <input className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary" type="text"
-                placeholder="Add Type"
-
-                  {...register('subCategory')}
-                />
-
+                <select
+      className="w-full rounded-lg block border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+      {...register('catrgory')}
+    >
+              <option disabled selected>
+          choose one
+        </option>
+      {
+      categoryLinkArr?.map((option:any) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
 
 
 <button className="inline-flex rounded items-center my-5 w-full justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10">Create New Links</button>
