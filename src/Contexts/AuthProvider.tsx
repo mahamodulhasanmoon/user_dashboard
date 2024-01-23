@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import { socketUrl } from "../constant/environment";
 import { showPushNotification } from "../utils/pushMsg";
+import { isMobile } from "react-device-detect";
+
 
 
 export interface User {
@@ -46,7 +48,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,7 +118,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           localStorage.removeItem("access_token");
           setUser(null);
           setToken(null);
+          if (isMobile) {
           window.location.href = '/signin';
+         } else {
+             window.location.href = '/login';
+         }
+         
         } 
       }
      

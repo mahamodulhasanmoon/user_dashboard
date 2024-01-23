@@ -1,14 +1,17 @@
 
 import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation,  } from "react-router-dom";
 
 import { AuthContext } from "../Contexts/AuthProvider";
 import Loader from "../common/Loader";
+import { isMobile } from "react-device-detect";
 
 const PrivateRoutes = ({ children }:any) => {
   const {user,loading} = useContext(AuthContext)
   
   const { pathname } = useLocation();
+  
+
 
   if (loading) {
     return <>
@@ -18,7 +21,11 @@ const PrivateRoutes = ({ children }:any) => {
 
 
   if (!loading && !user?.email) {
-    return <Navigate to='/signin' state={{ path: pathname }} />;
+    if (isMobile) {
+      return <Navigate to='/signin' state={{ path: pathname }} />;
+   } else {
+      return <Navigate to='/login' state={{ path: pathname }} />;
+   }
   }
 
   return children;

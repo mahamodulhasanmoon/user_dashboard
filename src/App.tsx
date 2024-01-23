@@ -2,12 +2,14 @@ import { Suspense, lazy,  useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Overview from './pages/Dashboard/Overview';
-import SignIn from './pages/Authentication/SignIn';
+// import SignIn from './pages/Authentication/SignIn';
 import Loader from './common/Loader';
 import routes from './routes';
 import PrivateRoutes from './routes/PrivateRoutes';
 import SignUp from './pages/Authentication/SignUp';
 import VerifyOTP from './pages/Authentication/VerifyOTP';
+import Auth from './pages/Authentication/Auth';
+import SignIn from './pages/Authentication/SignIn';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -29,6 +31,7 @@ function App() {
       />
       <Routes>
         
+        <Route path="/login" element={<Auth />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/free_trial" element={<SignUp />} />
         <Route path="/reset-password" element={<SignUp />} />
