@@ -10,23 +10,8 @@ const filterArr = [
   {
     label: 'paid',
     value: 'paid'
-  },
-  {
-    label: 'pending',
-    value: 'pending'
-  },
-  {
-    label: 'free',
-    value: 'free'
-  },
-  {
-    label: 'trial',
-    value: 'trial'
-  },
-  {
-    label: 'expired',
-    value: 'expired'
   }
+
 ]
 
 
