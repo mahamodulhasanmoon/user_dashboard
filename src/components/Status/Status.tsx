@@ -4,34 +4,33 @@ import CountComp from './CountComp';
 
 
 
-interface Subscription {
-  status: 'free' | 'trial' | 'paid' | 'expired';
-  startDate?: string;
-  endDate?: string;
-}
-
-interface UserData {
-  subscription?: Subscription;
-}
-
 function Status() {
 
-  const { user,setShowModal } = useContext(AuthContext);
-  const [subscriptionStatus, setSubscriptionStatus] = useState<Subscription['status']>('free');
+  const { user,setShowModal,status,subscription } = useContext(AuthContext);
   const [countdown, setCountdown] = useState<React.ReactNode>('00 days : 00 hours : 00 minutes : 00 seconds');
 
   useEffect(() => {
-    const userData = user as UserData;
-    const { subscription } = userData || {};
+    const userData = user;
+    const { plans } = userData || {};
 
-    if (subscription) {
-      const { status, endDate } = subscription;
+    if (plans) {
 
-      setSubscriptionStatus(status);
+      const trialData = subscription.reduce((latestPlan:any, currentPlan:any) => {
+        if (currentPlan.status === 'trial' && (!latestPlan || new Date(currentPlan.endDate).getTime() > new Date(latestPlan.endDate).getTime())) {
+            return currentPlan;
+        } else {
+            return latestPlan;
+        }
+    }, null);
 
-      if (status === 'paid' || status === 'trial') {
+
+  
+
+      // check my plan lists and permissions
+
+      if (trialData?.status === 'trial') {
         const currentDate = new Date();
-        const endDateTime = new Date(endDate || '');
+        const endDateTime = new Date(trialData.endDate || '');
 
         // Calculate initial timeLeft
         let timeLeft = endDateTime.getTime() - currentDate.getTime();
@@ -80,17 +79,20 @@ function Status() {
   }, [user]);
 
   const renderContent = () => {
-    if (subscriptionStatus === 'paid' || subscriptionStatus === 'trial') {
+    if ( status === 'trial') {
       return (
         <div>
           <div>
 
             <p>{countdown} </p>
+            <button 
+          onClick={() => setShowModal(true)}
+          className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Buy Primium</button>
 
           </div>
         </div>
       );
-    } else if (subscriptionStatus === 'expired') {
+    } else if (status === 'expired') {
       return (
         <div>
            <div className='flex items-center justify-center'>
@@ -107,8 +109,11 @@ function Status() {
       );
     } else {
       return (
-        <div>
+        <div className='flex items-center justify-center'>
           <p className='text-[#ff0000] font-bold'>Your Account Is Now Under Review Please wait 2 to 12 hour</p>
+          <button 
+          onClick={() => setShowModal(true)}
+          className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Buy Primium</button>
         </div>
       );
     }

@@ -7,9 +7,9 @@ export const linksTypeArr = [
   ];
 
   export const categoryLinkArr = [
-    { value: 'login', label: 'Login Page' },
-    { value: 'videoCall', label: 'Video Calling' },
-    { value: '2024', label: '2024 Update Links' },
+    { value: 'login', label: 'Login Page' ,price:500 },
+    { value: 'videoCall', label: 'Video Calling',price:500 },
+    // { value: '2024', label: '2024 Update Links'},
 
   ];
 

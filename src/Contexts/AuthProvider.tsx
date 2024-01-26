@@ -16,6 +16,7 @@ export interface User {
   email: string;
   role: string;
   gender: string;
+  plans:[];
  
 }
 
@@ -24,7 +25,9 @@ export interface AuthContextProps {
   user?: User | null | undefined;
   loading?: boolean;
   showModal?: any;
+  subscription?: any;
   token?: string | null;
+  status?: string | null;
   role?: string | null;
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,8 +48,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
+  const [status, setStatus] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [subscription, setSubScriptions] = useState([]);
 
 
 
@@ -60,10 +65,37 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         if(localStorage.getItem('access_token')){
           const data:any = await getData(`auth/me`);
+
           if (data.status === 'success') {
+            const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
+            setSubScriptions(subscriptions?.data?.subscriptions)
+           
+            const filteredArr =    subscriptions?.data?.subscriptions.map((sub:any) =>( {
+                 status: sub.status,
+                 site: sub?.site,
+                 category: sub?.category,
+                 
+               }))
+
+              //  check Status
+
+              const  userStatus:any = filteredArr.map((subscription:any) => subscription.status);
+
+if (userStatus.every((status:any) => status === 'expired')) {
+    setStatus('expired') ;
+} else if (userStatus.some((status:any) => status === 'approved')) {
+    setStatus('approved') ;
+} else if (userStatus.some((status:any) => status === 'trial')) {
+    setStatus('trial') ;
+} else {
+  setStatus('free')
+}
+
+const originalUser = {...data?.data,plans:filteredArr}
+            // for Data And tokens
             setToken(data?.data?.token);
             setRole(data?.data?.role);
-            setUser(data?.data);
+            setUser(originalUser);
             setLoading(false);
           } else {
             setLoading(false)
@@ -154,7 +186,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         messageAudio.load();
         messageAudio.play()
           .then(() => {
-            console.log('Message sound played');
             showPushNotification();
           })
           .catch(error => {
@@ -206,7 +237,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     role,
     showModal,
     setShowModal,
-    handleVerify
+    handleVerify,
+    status,
+    subscription
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

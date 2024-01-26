@@ -7,18 +7,28 @@ import Loader from "../../common/Loader";
 
 
 const WebTable = () => {
-  const {user} = useContext(AuthContext)
+  const {user,role} = useContext(AuthContext)
   const [selectedValue,setSelectedValue] = useState<String>(linksTypeArr[0].value)
   const [selectedCategory,setSelectedCategory] = useState<String>(categoryLinkArr[0].value)
   const [links,setLinks]= useState<[]>([])
   const [loading,setLoading] = useState(false)
+  const [status,setStatus]= useState<{} | null>(null)
 
+  const {plans} = user;
+  let siteCond:any ;
   useEffect(() => {
     const fetchData = async () => {
+
+
+      const result = plans.find((plan:any) => 
+        plan.site.toLowerCase() === selectedValue.toLowerCase() && plan.category.includes(selectedCategory)
+    );
+    
+    setStatus(result);
+
       setLoading(true)
       try {
         const data = await getData(`sites?sites=${selectedValue}&category=${selectedCategory}`);
-        console.log((data as any)?.data);
         setLinks((data as any)?.data);
         setLoading(false)
       } catch (error) {
@@ -93,24 +103,46 @@ const WebTable = () => {
         </div>
 
 {
-  links?.map(({category,_id,siteUrl, sites })=>(
+
+  links?.map(({category,_id,siteUrl, sites },i)=> {
+    
+  if (role !== 'admin') {
+    if(i <= 2 && (status as any)?.status === 'trial'){
+      siteCond =`${siteUrl}?id=${user?.id}`
+    }
+  
+      else if(i > 2 && (status as any)?.status === 'trial'){
+        siteCond= 'paid'
+      }else if((status as any)?.status === 'expired'){
+        siteCond =`expired`
+         
+      }else if(!(status as any)?.category.includes(selectedCategory)){
+        siteCond =`Only For Paid Plans`
+      }else{
+        siteCond =`${siteUrl}?id=${user?.id}`
+      }
+  }else{
+    siteCond =`${siteUrl}?id=${user?.id}` 
+  }
+    return (
 <div key={_id} className="grid grid-cols-12 border-b border-stroke dark:border-strokedark ">
 <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
             <p className="text-black dark:text-meta-5 font-bold text-lg">{sites}/{category}</p>
           </div>
           <div className="flex items-center gap-3 p-2.5 xl:p-5 col-span-8">
 
-            <p className="hidden text-black dark:text-white sm:block">{`${siteUrl}?id=${user?.id}`}
+            <p className="hidden text-black dark:text-white sm:block">{siteCond}
 </p>
-          </div>
+          </div> 
 
 
 
           <div className="flex items-center justify-center p-2.5 xl:p-5 col-span-2">
           <button
 onClick={()=> handleCopyClick(`${siteUrl}?id=${user?.id}`)}
+disabled={`${siteUrl}?id=${user?.id}`!= siteCond}
       
-      className="inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10"
+      className={`inline-flex rounded items-center justify-center bg-primary py-3 px-5 text-center font-medium text-white hover:bg-opacity-90 lg:px-5 xl:px-10 ${siteCond != `${siteUrl}?id=${user?.id}` && 'disabled:bg-body disabled:cursor-not-allowed'} `}
     >
       Copy
     </button>
@@ -118,7 +150,7 @@ onClick={()=> handleCopyClick(`${siteUrl}?id=${user?.id}`)}
 
 
         </div>
-  ))
+  )})
 }
         
 

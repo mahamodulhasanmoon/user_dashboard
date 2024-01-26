@@ -78,18 +78,18 @@ const UserTable = () => {
             <th scope="col" className="px-6 py-3">
               Created Time
             </th>
-            <th scope="col" className="px-6 py-3">
+            {/* <th scope="col" className="px-6 py-3">
               Validity
-            </th>
-            <th scope="col" className="px-6 py-3">
+            </th> */}
+            {/* <th scope="col" className="px-6 py-3">
               Status
-            </th>
+            </th> */}
 
           </tr>
         </thead>
         <tbody className='text-center'>
           {
-            users?.map(({ _id, name, email, updatedAt, subscription:{status,endDate}}, index) => (
+            users?.map(({ _id, name, email, updatedAt}, index) => (
               <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {index + 1}
@@ -104,15 +104,15 @@ const UserTable = () => {
                 <td className="px-6 py-4">
                   {formatUtcToLocal(updatedAt)}
                 </td>
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   {endDate}
-                </td>
+                </td> */}
                 
                 <td className={`px-6 font-bold py-4 ${getStatusColor(status)}`}>
                
-                {status === 'expired' ?
+                {/* {status === 'expired' ?
                 <button className="bg-primary text-white px-3 py-1">Delete  User</button>
-                : status}
+                : status} */}
               </td>
                 
 

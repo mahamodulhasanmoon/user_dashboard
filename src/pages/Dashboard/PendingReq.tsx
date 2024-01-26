@@ -8,7 +8,7 @@ const PendingReq = () => {
 
     const fetchData = async () => {
         try {
-          const data = await getData(`subscription/request`);
+          const data = await getData(`orders/request`);
           setUsers((data as any)?.data);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -19,8 +19,10 @@ const PendingReq = () => {
         fetchData();
       }, []);
 
+      console.log(users);
+
       const handleApproved = async ({id,userId}:any) => {
-        const data = await getData(`subscription/approve?id=${id}&user=${userId}`)
+        const data = await getData(`orders/approve?id=${id}&user=${userId}`)
         toast.success((data as any)?.message)
         fetchData()
 
@@ -41,14 +43,23 @@ const PendingReq = () => {
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
+                Site
+              </th>
+              <th scope="col" className="px-6 py-3">
+               Category
+              </th>
+              {/* <th scope="col" className="px-6 py-3">
+               Amount
+              </th> */}
+              {/* <th scope="col" className="px-6 py-3">
                Payment Method
-              </th>
-              <th scope="col" className="px-6 py-3">
+              </th> */}
+              {/* <th scope="col" className="px-6 py-3">
                 Number
-              </th>
-              <th scope="col" className="px-6 py-3">
+              </th> */}
+              {/* <th scope="col" className="px-6 py-3">
                 TRX ID
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Status
               </th>
@@ -57,7 +68,7 @@ const PendingReq = () => {
           </thead>
           <tbody className='text-center'>
             {
-                users?.map(({_id,paymentMethod,paymentNumber,status,trxId,userId:{email,name , _id:userId}},index)=>(
+                users?.map(({_id,paymentMethod,site,category,amount,paymentNumber,status,trxId,userId:{email,name , _id:userId}},index)=>(
             <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                {index + 1}
@@ -66,18 +77,33 @@ const PendingReq = () => {
                {name}
               </td>
               <td className="px-6 py-4">
-               {email}
+               {email  }
               </td>
+              <td className="px-6 py-4">
+               {site}
+              </td>
+              <td className="px-6 py-4">
+               {
+                (category as any)?.map((cat:any) =>(
+                  <ol key={cat}>
+                    <li className="text-left list-disc">{cat}</li>
+                  </ol>
+                ))
+               }
+              </td>
+              {/* <td className="px-6 py-4">
+               {amount}
+              </td> */}
 
-              <td className="px-6 py-4">
+              {/* <td className="px-6 py-4">
               {paymentMethod}
-              </td>
-              <td className="px-6 py-4">
+              </td> */}
+              {/* <td className="px-6 py-4">
               {paymentNumber}
-              </td>
-              <td className="px-6 py-4">
+              </td> */}
+              {/* <td className="px-6 py-4">
               {trxId}
-              </td>
+              </td> */}
               <td >
                 {
                     status === 'pending' ? 
