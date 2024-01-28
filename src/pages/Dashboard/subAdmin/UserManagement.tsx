@@ -120,40 +120,16 @@ export default function UserManagement() {
 </select>
 
 {/* Select Site */}
-<div className="pt-6">
+<label className="text-xl pt-6 font-bold " htmlFor="Select Site">Select Site</label>
+<div className=" flex  gap-8 flex-wrap">
 
-<label className="text-xl font-bold pt-6" htmlFor="Select Site">Select Site</label>
                       
-{/* {
- linksTypeArr?.map((option: any) => (
-    <div key={option.value} className="flex items-center text-xl font-bold">
-      <input
-        className="w-5 h-5"
-        type="checkbox"
-        value={option.value}
-        onChange={e => {
-          if (e.target.checked) {
-            setSelectedSiteCategories(prev => ({
-              ...prev,
-              [option.value]: categoryLinkArr.map(link => link.value)
-            }));
-          } else {
-            setSelectedSiteCategories(prev => {
-              const { [option.value]: _, ...rest } = prev;
-              return rest;
-            });
-          }
-        }}
-      />
-      <label className="dark:text-white pl-4 py-2">{option.label}</label>
-    </div>
-  ))
-  
-} */}
+
 
 {
         linksTypeArr?.map((option: any) => (
-          <div key={option.value} className="flex items-center text-xl font-bold">
+          <div className="flex gap-6 justify-center" key={option.value} >
+            <div className="flex items-center text-xl font-bold">
             <input
               className="w-5 h-5"
               type="checkbox"
@@ -162,32 +138,34 @@ export default function UserManagement() {
                 if (e.target.checked) {
                  const startDate =formatDate(new Date()) ;
                  const endDate = formatDate(new Date(Date.now() + 30*24*60*60*1000));
-                 append({ site: option.value, categories: [], startDate, endDate,status:'approved' });
+                 append({ site: option.value, category: [], startDate, endDate,status:'approved' });
                 } else {
                  remove(fields.findIndex((field: any) => field?.site === option.value));
                 }
               }}
             />
-            <label className="dark:text-white pl-4 py-2">{option.label}</label>
+            <label className="dark:text-white pl-4 py-2 ">{option.label}</label>
+          </div>
           </div>
         ))
       }
       {
         fields?.map((field:any, index:any) => (
-          <div key={field.site} className="flex flex-col text-xl font-bold">
-            <label>{field.site}</label>
+<div>
+            <label className="text-xl pt-6 font-bold">{field.site}</label>
+<div key={field.site} className="flex gap-6 text-xl font-bold">
             {
               categoryLinkArr?.map((option: any) => (
-                <div key={option.value} className="flex items-center">
+                <div  key={option.value} className="flex  items-center">
                  <input
                     className="w-5 h-5"
                     type="checkbox"
                     value={option.value}
                     onChange={e => {
                       if (e.target.checked) {
-                        fields[index].categories.push(option.value);
+                        fields[index].category.push(option.value);
                       } else {
-                        fields[index].categories = fields[index].categories.filter((category:any) => category !== option.value);
+                        fields[index].category = fields[index].category.filter((category:any) => category !== option.value);
                       }
                     }}
                  />
@@ -196,6 +174,7 @@ export default function UserManagement() {
               ))
             }
           </div>
+</div>
         ))
       }
 
