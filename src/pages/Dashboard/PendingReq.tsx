@@ -9,6 +9,7 @@ const PendingReq = () => {
     const fetchData = async () => {
         try {
           const data = await getData(`orders/request`);
+          console.log((data as any)?.data);
           setUsers((data as any)?.data);
         } catch (error) {
           console.error('Error fetching data:', error);
