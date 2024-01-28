@@ -79,13 +79,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
               //  check Status
 
-              const  userStatus:any = filteredArr.map((subscription:any) => subscription.status);
+              const  userStatus:any = filteredArr?.map((subscription:any) => subscription.status);
 
-if (userStatus.every((status:any) => status === 'expired')) {
+if (userStatus?.every((status:any) => status === 'expired')) {
     setStatus('expired') ;
-} else if (userStatus.some((status:any) => status === 'approved')) {
+} else if (userStatus?.some((status:any) => status === 'approved')) {
     setStatus('approved') ;
-} else if (userStatus.some((status:any) => status === 'trial')) {
+} else if (userStatus?.some((status:any) => status === 'trial')) {
     setStatus('trial') ;
 } else {
   setStatus('free')

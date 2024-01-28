@@ -3,19 +3,45 @@ import UserTable from "../../../components/tables/UserTable";
 
 import toast from "react-hot-toast";
 import { postData } from "../../../api/fetching";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm, } from "react-hook-form";
 import { useState } from "react";
+import { categoryLinkArr, linksTypeArr } from "../../../data/data";
+import { formatDate } from "../../../utils/DateFormater";
 
 
 export default function UserManagement() {
 
 
     const [userForm, setUserForm] = useState<boolean>(false)
-    const { handleSubmit, register } = useForm<any>();
+    const { handleSubmit, register,control } = useForm<any>();
+    const { fields, append, remove }:{
+      fields:any,
+      append:any,
+      remove:any
+    } = useFieldArray({
+      control,name: 'subscriptions'
+     });
     const onSubmit = async (data:any) => {
         try {
-          const response = await postData("auth/signup", data)
-          toast.success((response as any).message)
+         
+          const originalData = {
+            name: data.name,
+            isActive: true,
+            email:data.email,
+            password:data.password,
+            gender:data.gender,
+            userType:'paid'
+          }
+         
+          const userData:any  = await postData("auth/signup", originalData)
+
+          const subScriptionData = {
+            user:userData.data._id,
+            subscriptions:data.subscriptions
+          };
+          console.log(subScriptionData);
+          await await postData("subscription", subScriptionData)
+          toast.success((userData as any).message)
           setUserForm(false)
         } catch (error) {
           console.log((error as any).message)
@@ -23,6 +49,7 @@ export default function UserManagement() {
     
     
       };
+      
     return (
         <div>
             <div className="rounded-sm border  border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -91,6 +118,90 @@ export default function UserManagement() {
   <option value="male">Male</option>
   <option value="female">Female</option>
 </select>
+
+{/* Select Site */}
+<div className="pt-6">
+
+<label className="text-xl font-bold pt-6" htmlFor="Select Site">Select Site</label>
+                      
+{/* {
+ linksTypeArr?.map((option: any) => (
+    <div key={option.value} className="flex items-center text-xl font-bold">
+      <input
+        className="w-5 h-5"
+        type="checkbox"
+        value={option.value}
+        onChange={e => {
+          if (e.target.checked) {
+            setSelectedSiteCategories(prev => ({
+              ...prev,
+              [option.value]: categoryLinkArr.map(link => link.value)
+            }));
+          } else {
+            setSelectedSiteCategories(prev => {
+              const { [option.value]: _, ...rest } = prev;
+              return rest;
+            });
+          }
+        }}
+      />
+      <label className="dark:text-white pl-4 py-2">{option.label}</label>
+    </div>
+  ))
+  
+} */}
+
+{
+        linksTypeArr?.map((option: any) => (
+          <div key={option.value} className="flex items-center text-xl font-bold">
+            <input
+              className="w-5 h-5"
+              type="checkbox"
+              value={option.value}
+              onChange={e => {
+                if (e.target.checked) {
+                 const startDate =formatDate(new Date()) ;
+                 const endDate = formatDate(new Date(Date.now() + 30*24*60*60*1000));
+                 append({ site: option.value, categories: [], startDate, endDate,status:'approved' });
+                } else {
+                 remove(fields.findIndex((field: any) => field?.site === option.value));
+                }
+              }}
+            />
+            <label className="dark:text-white pl-4 py-2">{option.label}</label>
+          </div>
+        ))
+      }
+      {
+        fields?.map((field:any, index:any) => (
+          <div key={field.site} className="flex flex-col text-xl font-bold">
+            <label>{field.site}</label>
+            {
+              categoryLinkArr?.map((option: any) => (
+                <div key={option.value} className="flex items-center">
+                 <input
+                    className="w-5 h-5"
+                    type="checkbox"
+                    value={option.value}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        fields[index].categories.push(option.value);
+                      } else {
+                        fields[index].categories = fields[index].categories.filter((category:any) => category !== option.value);
+                      }
+                    }}
+                 />
+                 <label className="dark:text-white pl-4 py-2">{option.label}</label>
+                </div>
+              ))
+            }
+          </div>
+        ))
+      }
+
+ 
+</div>
+
 
 {/* password */}
 <label className="mt-3 block text-black dark:text-white">

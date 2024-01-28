@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { Outlet } from 'react-router-dom';
-import PaymentModal from '../components/Status/PaymentModal';
+import PaymentModal from '../modals/PaymentModal';
+import ActivationModal from '../modals/ActivationModal';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 
 
 const DefaultLayout = () => {
+  const {user} = useContext(AuthContext)
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="dark:bg-boxdark-2  dark:text-bodydark">
+      {
+!user?.isActive && (
+  <ActivationModal/>
+)
+      }
+     
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -18,8 +27,9 @@ const DefaultLayout = () => {
     
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main>
-            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div className="mx-auto  max-w-screen-2xl p-4 md:p-6 2xl:p-10">
               <PaymentModal/>
+              
               <Outlet />
          
             </div>

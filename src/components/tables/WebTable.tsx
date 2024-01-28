@@ -23,7 +23,7 @@ const WebTable = () => {
       const result = plans.find((plan:any) => 
         plan.site.toLowerCase() === selectedValue.toLowerCase() && plan.category.includes(selectedCategory)
     );
-    
+ 
     setStatus(result);
 
       setLoading(true)

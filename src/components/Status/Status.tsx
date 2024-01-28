@@ -82,12 +82,13 @@ function Status() {
     if ( status === 'trial') {
       return (
         <div>
-          <div>
+          <div className='flex items-center gap-10'>
 
             <p>{countdown} </p>
             <button 
           onClick={() => setShowModal(true)}
-          className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Buy Primium</button>
+          disabled={!user?.isActive}
+          className={`bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold ${!user.isActive && 'disabled:cursor-not-allowed'}`}>Buy Primium</button>
 
           </div>
         </div>
@@ -113,7 +114,8 @@ function Status() {
           <p className='text-[#ff0000] font-bold'>Your Account Is Now Under Review Please wait 2 to 12 hour</p>
           <button 
           onClick={() => setShowModal(true)}
-          className='bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold'>Buy Primium</button>
+          disabled={!user?.isActive}
+          className={`bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold ${!user.isActive && 'disabled:cursor-not-allowed'}`}>Buy Primium</button>
         </div>
       );
     }

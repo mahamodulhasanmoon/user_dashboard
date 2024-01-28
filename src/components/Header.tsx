@@ -17,7 +17,7 @@ const {user}= useContext(AuthContext)
  
  
   return (
-    <header className="sticky top-0 z-999 flex w-full items-center justify-between bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+    <header className="sticky top-0 z-99 flex w-full items-center justify-between bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className='flex items-center justify-center w-1/2'>
         {
 user?.role !== 'admin' && (

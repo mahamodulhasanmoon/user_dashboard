@@ -1,15 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Contexts/AuthProvider";
+import { useContext,  useState } from "react";
+import { AuthContext } from "../Contexts/AuthProvider";
 import { useForm } from "react-hook-form";
-import { postData } from "../../api/fetching";
+import { postData } from "../api/fetching";
 import toast from "react-hot-toast";
-import { categoryLinkArr, linksTypeArr } from "../../data/data";
-import { handleCopyClick } from "../../utils/copyToClipboard";
+import { categoryLinkArr, linksTypeArr } from "../data/data";
+import { handleCopyClick } from "../utils/copyToClipboard";
 
 interface ISubscription {
-  // paymentNumber: number;
-  // trxId: string;
-  // paymentMethod: string;
   site: string;
   category: string;
 }
@@ -19,11 +16,11 @@ export default function PaymentModal() {
   const { handleSubmit, register } = useForm<ISubscription>();
   const [checkedItems, setCheckedItems] = useState<any>([]);
 
-  const [amount,setAmount] = useState<any>(0);
+  // const [amount,setAmount] = useState<any>(0);
 
-  useEffect(()=>{
-    setAmount(checkedItems.length * 500)
-  },[checkedItems])
+  // useEffect(()=>{
+  //   setAmount(checkedItems.length * 500)
+  // },[checkedItems])
 
   const handleCheckboxChange = (event:any) => {
 
