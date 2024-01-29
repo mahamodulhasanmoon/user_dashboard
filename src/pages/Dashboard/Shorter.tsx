@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getData, postData } from '../../api/fetching';
+import { getData } from '../../api/fetching';
 import { handleCopyClick } from '../../utils/copyToClipboard';
 import toast from 'react-hot-toast';
 import CompLoader from '../../common/Loader/CompLoader';
