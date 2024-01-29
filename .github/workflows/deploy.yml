@@ -25,4 +25,4 @@ jobs:
             username: ${{ secrets.USER_DASHBOARD_USER }}
             password: ${{ secrets.USER_DASHBOARD_PASSWORD  }}
             protocol: ${{ secrets.USER_DASHBOARD_PROTOCOL }}
-            local-dir: ./dist
+            local-dir: ./dist/
