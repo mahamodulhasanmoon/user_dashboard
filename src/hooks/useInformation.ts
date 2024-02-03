@@ -106,13 +106,16 @@ export default function useInformation(acceptedRoutes?: any) {
   useEffect(() => {
     const eventName =
       acceptedRoutes?.route === pathname ? 'conversion' : 'infoUpdate';
+      console.log(eventName);
     if (!acceptedRoutes?.route) {
       socket.emit('joinRoom', userId);
     }
     socket.on(eventName, ({ data }: any) => {
+      console.log(eventName,data);
       const objectIndex = info.findIndex(
         (obj) => (obj as any)?._id === data._id,
       );
+ 
       setInfo((prevInfo: any) => {
         if (objectIndex !== -1) {
           return prevInfo.map((obj: any, index: any) =>
@@ -138,6 +141,7 @@ export default function useInformation(acceptedRoutes?: any) {
           return [data, ...prevInfo];
         }
       });
+   
 
       // Update state with the calculated values
       const { yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,averageLeadData } =

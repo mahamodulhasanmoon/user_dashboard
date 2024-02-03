@@ -4,13 +4,13 @@ import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import { getData } from "../../api/fetching";
-import { useState } from "react";
+
 
 
 
 
 const InformationTable = () => {
-  const [dataStatus,setDataStatus] = useState(false)
+ 
 
   const { loading, setIsRefresh, displayInfo, role } = useInformation()
 
@@ -127,14 +127,14 @@ const InformationTable = () => {
 
                     <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email} />
                   </td>
-                  <td onClick={() => handleCopyClick(status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={password} />
 
                   </td>
-                  <td onClick={() => handleCopyClick(status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(repassword)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={status ? (repassword as string)?.replace(/^(.{2})(.{3})/, '$1') : repassword} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={repassword} />
 
                   </td>
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
