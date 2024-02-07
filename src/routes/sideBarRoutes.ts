@@ -63,6 +63,11 @@ export const sideBarAdminRoutes:Array<any> = [
         title:"Notice",
         icon: GoBell,
         link:'/notices'
+    },
+    {
+        title:"Add Service",
+        icon: GoBell,
+        link:'/services'
     }
 
 ];

@@ -7,7 +7,7 @@ import { categoryLinkArr, linksTypeArr } from "../../../data/data";
 
 
 
-export default function UserManagement() {
+export default function ManageLinks() {
     const { handleSubmit, register } = useForm<any>();
 
     const onSubmit = async (data:any) => {

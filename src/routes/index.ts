@@ -2,6 +2,9 @@ import { lazy } from 'react';
 import UserManagement from '../pages/Dashboard/subAdmin/UserManagement';
 import ManageLinks from '../pages/Dashboard/subAdmin/ManageLinks';
 import PendingReq from '../pages/Dashboard/PendingReq';
+import ManageSocials from '../pages/Socials/ManageSocial';
+
+ const Support =   lazy(() =>import('../components/Support'));
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
 const Information = lazy(() => import('../pages/Dashboard/Information'));
 const Shorter = lazy(() => import('../pages/Dashboard/Shorter'));
@@ -39,6 +42,11 @@ const coreRoutes = [
     path: '/profile',
     title: 'Profile',
     component: Settings,
+  },
+  {
+    path: '/support',
+    title: 'support',
+    component: Support,
   }
 ];
 
@@ -54,6 +62,11 @@ const adminRoutes = [
     component: PendingReq,
   },
 
+  {
+    path: '/services',
+    title: 'Manage Links',
+    component: ManageSocials,
+  },
   {
     path: '/manage_links',
     title: 'Manage Links',

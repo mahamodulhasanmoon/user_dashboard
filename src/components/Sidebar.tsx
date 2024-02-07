@@ -4,6 +4,7 @@ import SidebarLinkGroup from './SidebarLinkGroup';
 import { sideBarAdminRoutes, sideBarRoutes} from './../routes/sideBarRoutes'
 import { RxDashboard } from "react-icons/rx";
 import { SiConvertio } from "react-icons/si";
+import { MdSupportAgent } from "react-icons/md";
 import { AuthContext } from '../Contexts/AuthProvider';
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -256,6 +257,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
              ))
              }
+                           <li>
+                <NavLink
+                  to='/support'
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-form-stroke duration-300 ease-in-out hover:bg-stroke dark:hover:bg-meta-4 ${
+                    pathname.includes('/support') &&
+                    'bg-stroke dark:bg-meta-4'
+                  }`}
+                >
+<MdSupportAgent />
+Support
+                </NavLink>
+              </li>
 
 
             </ul>
