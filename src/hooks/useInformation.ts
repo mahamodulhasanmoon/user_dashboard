@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { socketUrl } from '../constant/environment';
-import { io } from 'socket.io-client';
 import { AuthContext } from '../Contexts/AuthProvider';
 import { getData } from '../api/fetching';
 import { GoGraph } from 'react-icons/go';
 import { manageCount } from '../utils/manageInfo';
 import { useLocation } from 'react-router-dom';
+import useSocket from './useSocket';
 
 export default function useInformation(acceptedRoutes?: any) {
   const { pathname } = useLocation();
@@ -36,7 +35,7 @@ export default function useInformation(acceptedRoutes?: any) {
       overviewInPercent: 0,
     },
   ]);
-  const socket = io(socketUrl);
+  const {receive,joinRoom} = useSocket()
   const { role, user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState<[]>([]);
@@ -106,12 +105,12 @@ export default function useInformation(acceptedRoutes?: any) {
   useEffect(() => {
     const eventName =
       acceptedRoutes?.route === pathname ? 'conversion' : 'infoUpdate';
-      console.log(eventName);
+    
     if (!acceptedRoutes?.route) {
-      socket.emit('joinRoom', userId);
+     joinRoom(userId);
     }
-    socket.on(eventName, ({ data }: any) => {
-      console.log(eventName,data);
+    receive(eventName, ({ data }: any) => {
+      console.log(eventName,data,'data received');
       const objectIndex = info.findIndex(
         (obj) => (obj as any)?._id === data._id,
       );
@@ -166,10 +165,7 @@ export default function useInformation(acceptedRoutes?: any) {
         },
       ]);
     });
-    return () => {
-      socket.disconnect();
-    };
-  }, [socket]);
+  }, []);
 
   return {
     info,

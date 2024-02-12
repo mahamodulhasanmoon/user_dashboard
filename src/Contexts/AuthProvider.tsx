@@ -1,10 +1,9 @@
 import React, { createContext,  useState, ReactNode, useEffect } from "react";
 import { getData, postData } from "../api/fetching";
 import { toast } from "react-toastify";
-import { io } from "socket.io-client";
-import { socketUrl } from "../constant/environment";
 import { showPushNotification } from "../utils/pushMsg";
 import { isMobile } from "react-device-detect";
+import useSocket from "../hooks/useSocket";
 
 
 
@@ -44,7 +43,7 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const socket = io(socketUrl);
+  const {receive,joinRoom} = useSocket()
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
@@ -52,9 +51,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [subscription, setSubScriptions] = useState([]);
-
-
-
 
 
 
@@ -173,11 +169,12 @@ const originalUser = {...data?.data,plans:filteredArr}
 
     const userId = user?.id
 
-    socket.emit('joinRoom', userId);
+    joinRoom(userId);
 
-    socket.on('infoUpdate', () => {
+   receive('infoUpdate', () => {
      
       const audio = new Audio('notification.mp3');
+      console.log('hitted');
       audio.load()
       audio.play()
       .then(() =>   {
@@ -200,10 +197,8 @@ const originalUser = {...data?.data,plans:filteredArr}
    
     }); 
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [socket]);
+
+  }, [user,receive]);
 
 
     useEffect(() => {

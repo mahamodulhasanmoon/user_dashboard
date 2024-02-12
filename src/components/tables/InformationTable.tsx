@@ -9,8 +9,9 @@ import { getData } from "../../api/fetching";
 
 
 
+
 const InformationTable = () => {
- 
+
 
   const { loading, setIsRefresh, displayInfo, role } = useInformation()
 
