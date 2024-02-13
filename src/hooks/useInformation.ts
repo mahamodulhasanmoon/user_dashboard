@@ -129,10 +129,10 @@ export default function useInformation(acceptedRoutes?: any) {
         }
       });
 
-     
-     
+
+     console.log(data);
       setDisplayInfo((prevInfo: any) => {
-        const emailExistsInData = (data as any)?.data?.some((item: any) => "email" in item);
+        const emailExistsInData = "email" in data
         if (objectIndex !== -1) {
           if (!emailExistsInData) {
             return prevInfo;
