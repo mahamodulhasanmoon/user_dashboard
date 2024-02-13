@@ -181,13 +181,10 @@ const InformationTable = () => {
 
           </tbody>
         </table>
-        <PaginationNav1Presentation 
-  //         gotoPage={2}
-  // canPreviousPage={true}
-  // canNextPage={true}
-  // pageCount={50}
-  // pageIndex={5}
+<div className="flex items-center justify-center">
+<PaginationNav1Presentation 
   />
+</div>
       </div>
 
 

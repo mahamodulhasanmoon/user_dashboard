@@ -5,8 +5,8 @@ export default function Button2({ content, onClick, active, disabled }:any) {
         ${active ? "bg-red-500 text-white" : "text-red-500"}
         ${
           !disabled
-            ? "bg-white hover:bg-red-500 hover:text-white"
-            : "text-red-300 bg-white cursor-not-allowed"
+            ? "bg-primary hover:bg-success hover:text-white"
+            : "text-white bg-primary cursor-not-allowed"
         }
         `}
         onClick={onClick}
