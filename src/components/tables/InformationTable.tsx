@@ -5,6 +5,7 @@ import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import { getData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
+import { useState } from "react";
 
 
 
@@ -12,6 +13,8 @@ import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 
 
 const InformationTable = () => {
+  const [pageIndex, setPageIndex] = useState(0);
+const pageCount = 10;
 
 
   const { loading, setIsRefresh, displayInfo, role } = useInformation()
@@ -183,6 +186,9 @@ const InformationTable = () => {
         </table>
 <div className="flex items-center justify-center">
 <PaginationNav1Presentation 
+pageCount={pageCount}
+pageIndex={pageIndex}
+setPageIndex={setPageIndex}
   />
 </div>
       </div>

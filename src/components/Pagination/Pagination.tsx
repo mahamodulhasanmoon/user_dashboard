@@ -1,14 +1,8 @@
 
-import { useState } from "react";
 import { PaginationNav1 } from "./PaginationNav1";
 
+function PaginationNav1Presentation({pageIndex,pageCount,setPageIndex}:any) {
 
-
-
-
-function PaginationNav1Presentation() {
-  const [pageIndex, setPageIndex] = useState(0);
-  const pageCount = 10;
   return (
     <div className="flex gap-3 flex-wrap p-6 py-12">
       <PaginationNav1
