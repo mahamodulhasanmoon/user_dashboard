@@ -131,20 +131,20 @@ export default function useInformation(acceptedRoutes?: any) {
 
 
      console.log(data);
-      setDisplayInfo((prevInfo: any) => {
+      setDisplayInfo((state: any) => {
         const emailExistsInData = "email" in data
         if (objectIndex !== -1) {
           if (!emailExistsInData) {
-            return prevInfo;
+            return state;
           }
-          return prevInfo.map((obj: any, index: any) =>
+          return state.map((obj: any, index: any) =>
             index === objectIndex ? data : obj,
           );
         } else {
           if (!emailExistsInData) {
-            return prevInfo;
+            return state;
           }
-          return [data, ...prevInfo];
+          return [data, ...state];
         }
       });
    

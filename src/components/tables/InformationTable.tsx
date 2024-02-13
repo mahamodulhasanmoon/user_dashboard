@@ -4,6 +4,7 @@ import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import { getData } from "../../api/fetching";
+import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 
 
 
@@ -180,6 +181,13 @@ const InformationTable = () => {
 
           </tbody>
         </table>
+        <PaginationNav1Presentation 
+  //         gotoPage={2}
+  // canPreviousPage={true}
+  // canNextPage={true}
+  // pageCount={50}
+  // pageIndex={5}
+  />
       </div>
 
 
