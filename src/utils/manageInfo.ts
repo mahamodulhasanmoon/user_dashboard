@@ -2,7 +2,6 @@ export function manageCount(infoData: any) {
 
 
 
-
  let info = infoData.filter((item:any) => "email" in item);
     const today = new Date();
     const todayFormatted = today.toISOString().split('T')[0];

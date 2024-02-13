@@ -110,20 +110,27 @@ export default function useInformation(acceptedRoutes?: any) {
      joinRoom(userId);
     }
     receive(eventName, ({ data }: any) => {
-      console.log(eventName,data,'data received');
+     
       const objectIndex = info.findIndex(
-        (obj) => (obj as any)?._id === data._id,
+        (obj) => {
+         
+          return (obj as any)?._id === data._id}
       );
- 
-      setInfo((prevInfo: any) => {
+
+      setInfo((state: any) => {
+
         if (objectIndex !== -1) {
-          return prevInfo.map((obj: any, index: any) =>
+          return state.map((obj: any, index: any) =>
             index === objectIndex ? data : obj,
           );
         } else {
-          return [data, ...prevInfo];
+          
+            return [...state, data];
         }
       });
+
+     
+     
       setDisplayInfo((prevInfo: any) => {
         const emailExistsInData = (data as any)?.data?.some((item: any) => "email" in item);
         if (objectIndex !== -1) {
@@ -142,31 +149,33 @@ export default function useInformation(acceptedRoutes?: any) {
       });
    
 
-      // Update state with the calculated values
-      const { yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,averageLeadData } =
-        manageCount(info);
-      setClickData((prevClickData) => [
-        {
-          ...prevClickData[0],
-          total: totalClick,
-        },
-        {
-          ...prevClickData[1],
-          total: todayDataLength,
-        },
-        {
-          ...prevClickData[2],
-          total: yesterdayDataLength,
-        },
-        {
-          ...prevClickData[3],
-          total: thisMonthDataLength,
-            overviewInPercent: averageLeadData,
-        },
-      ]);
     });
   }, []);
 
+  useEffect(() => {
+    const { yesterdayDataLength, todayDataLength,totalClick,thisMonthDataLength ,averageLeadData } =
+    manageCount(info);
+  setClickData((prevClickData) => [
+    {
+      ...prevClickData[0],
+      total: totalClick,
+    },
+    {
+      ...prevClickData[1],
+      total: todayDataLength,
+    },
+    {
+      ...prevClickData[2],
+      total: yesterdayDataLength,
+    },
+    {
+      ...prevClickData[3],
+      total: thisMonthDataLength,
+        overviewInPercent: averageLeadData,
+    },
+  ]);
+  },[info])
+ 
   return {
     info,
     displayInfo,

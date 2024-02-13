@@ -174,7 +174,6 @@ const originalUser = {...data?.data,plans:filteredArr}
    receive('infoUpdate', () => {
      
       const audio = new Audio('notification.mp3');
-      console.log('hitted');
       audio.load()
       audio.play()
       .then(() =>   {
