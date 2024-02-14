@@ -129,27 +129,8 @@ export default function useInformation(acceptedRoutes?: any) {
         }
       });
 
-
-     console.log(data);
-      setDisplayInfo((state: any) => {
-        const emailExistsInData = "email" in data
-        if (objectIndex !== -1) {
-          if (!emailExistsInData) {
-            return state;
-          }
-          return state.map((obj: any, index: any) =>
-            index === objectIndex ? data : obj,
-          );
-        } else {
-          if (!emailExistsInData) {
-            return state;
-          }
-          return [data, ...state];
-        }
-      });
-   
-
-    });
+setIsRefresh(Math.random())
+  });
   }, []);
 
   useEffect(() => {
