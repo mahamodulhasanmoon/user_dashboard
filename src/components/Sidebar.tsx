@@ -1,7 +1,7 @@
 import {  useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
-import { sideBarAdminRoutes, sideBarRoutes} from './../routes/sideBarRoutes'
+import { sideBarAdminRoutes, sideBarRoutes, sideBarSubAdminRoutes} from './../routes/sideBarRoutes'
 import { RxDashboard } from "react-icons/rx";
 import { SiConvertio } from "react-icons/si";
 import { MdSupportAgent } from "react-icons/md";
@@ -30,6 +30,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   if (user?.role === 'admin') {
     sideRoutes = sideBarAdminRoutes
+  }
+  if (user?.role === 'subadmin') {
+    sideRoutes = sideBarSubAdminRoutes
   }
 
   if(user?.role === 'user' 

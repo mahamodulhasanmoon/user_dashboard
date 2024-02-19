@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getData } from "../../api/fetching";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 
 const PendingReq = () => {
+  const {user} = useContext(AuthContext)
     const [users,setUsers]= useState([])
 
     const fetchData = async () => {
         try {
-          const data = await getData(`orders/request`);
+          const data = await getData(`orders/request?createdBy=${user?._id}`);
           console.log((data as any)?.data);
           setUsers((data as any)?.data);
         } catch (error) {
