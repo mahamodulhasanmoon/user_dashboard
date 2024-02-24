@@ -109,11 +109,12 @@ export default function useInformation(acceptedRoutes?: any) {
   const userId = user?.id;
   useEffect(() => {
     const eventName =
-      acceptedRoutes?.route === pathname ? 'conversion' : 'infoUpdate';
+     ( acceptedRoutes?.route === pathname || user?.role==='admin') ? 'conversion' : 'infoUpdate';
     
     if (!acceptedRoutes?.route) {
      joinRoom(userId);
     }
+   
     receive(eventName, ({ data }: any) => {
      
       const objectIndex = info.findIndex(
