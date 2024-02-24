@@ -57,6 +57,11 @@ const adminRoutes = [
     component: UserManagement,
   },
   {
+    path: '/users/view/:id',
+    title: 'users',
+    component: UserManagement,
+  },
+  {
     path: '/pending',
     title: 'pending',
     component: PendingReq,

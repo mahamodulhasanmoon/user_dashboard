@@ -42,17 +42,22 @@ export default function useInformation(acceptedRoutes?: any) {
   const [displayInfo,setDisplayInfo] = useState<[]>([]);
   const [isRefresh, setIsRefresh] = useState(0);
 
+  const [page,setPage] = useState<any>(1)
+  const [totalPages,setTotalPages]= useState(0)
+
   let url: string;
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        if (role === 'admin' || acceptedRoutes?.route === pathname) {
-          url = `information`;
-        } else {
-          url = `information?id=${user?.id}`;
+      if(role === 'admin' || acceptedRoutes?.route === pathname) {
+          url = `information?page=${page}`;
         }
-        const data = await getData(url);
+        else {
+          url = `information?id=${user?.id}&page=${page}`;
+        }
+        const data:any = await getData(url);
+        setTotalPages(data.pages.totalPages);
         setInfo((data as any)?.data);
         setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
         setLoading(false);
@@ -99,7 +104,7 @@ export default function useInformation(acceptedRoutes?: any) {
     };
 
     fetchData();
-  }, [user, isRefresh]);
+  }, [user,page, isRefresh,setPage]);
 
   const userId = user?.id;
   useEffect(() => {
@@ -164,5 +169,9 @@ setIsRefresh(Math.random())
     setIsRefresh,
     role,
     clickData,
+    setPage,
+    setTotalPages,
+    totalPages,
+    page
   };
 }

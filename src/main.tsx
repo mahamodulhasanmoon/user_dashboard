@@ -6,15 +6,16 @@ import './index.css';
 import './satoshi.css';
 
 import AuthProvider from './Contexts/AuthProvider';
+import React from 'react';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <AuthProvider>
     <Router>
       <App  />
     </Router>
     </AuthProvider>
-  // </React.StrictMode>
+ </React.StrictMode>
 );
 

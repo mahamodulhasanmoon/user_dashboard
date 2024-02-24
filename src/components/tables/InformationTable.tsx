@@ -13,11 +13,9 @@ import { useState } from "react";
 
 
 const InformationTable = () => {
-  const [pageIndex, setPageIndex] = useState(0);
-const pageCount = 10;
 
 
-  const { loading, setIsRefresh, displayInfo, role } = useInformation()
+  const {  loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
   const handleDisabled = async (id: any,status:any) => {
     try {
@@ -187,9 +185,9 @@ const pageCount = 10;
         </table>
 <div className="flex items-center justify-center">
 <PaginationNav1Presentation 
-pageCount={pageCount}
-pageIndex={pageIndex}
-setPageIndex={setPageIndex}
+pageCount={totalPages}
+pageIndex={page}
+setPageIndex={setPage}
   />
 </div>
       </div>
