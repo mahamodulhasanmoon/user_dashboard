@@ -171,6 +171,15 @@ const originalUser = {...data?.data,plans:filteredArr}
 
     joinRoom(userId);
 
+  let eventName:any;
+  if(user?.role==='admin'){
+   eventName = 'conversion'
+  }else{
+    eventName = 'infoUpdate'
+  }
+    
+  
+
    receive('infoUpdate', () => {
      
       const audio = new Audio('notification.mp3');
