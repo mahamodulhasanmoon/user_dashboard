@@ -5,11 +5,6 @@ import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import { getData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
-import { useState } from "react";
-
-
-
-
 
 
 const InformationTable = () => {
@@ -150,6 +145,7 @@ const InformationTable = () => {
                       <td className="px-2 py-1 font-bold cursor-pointer ">
                         <div className="relative inline-block">
                           <button
+                          title={platform}
                             onClick={() => {handleDisabled(_id,status)}}
                             className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                               }`}>{!status ? 'Hide' : 'show'}</button>
@@ -175,11 +171,6 @@ const InformationTable = () => {
 
               ))
             }
-
-
-
-
-
 
           </tbody>
         </table>
