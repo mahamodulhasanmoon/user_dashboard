@@ -178,27 +178,15 @@ const originalUser = {...data?.data,plans:filteredArr}
     eventName = 'infoUpdate'
   }
     
-  console.log(eventName);
+ 
   
 
    receive(eventName, () => {
      
-      const audio = new Audio('notification.mp3');
+      const audio = new Audio('tone.mp3');
       audio.load()
       audio.play()
-      .then(() =>   {
-              setTimeout(() => {
-        const messageAudio = new Audio('message.mp3');
-        messageAudio.load();
-        messageAudio.play()
-          .then(() => {
-            showPushNotification();
-          })
-          .catch(error => {
-            console.error('Error playing message sound:', error);
-          });
-      }, 2000);
-      })
+   
       .catch(error => {
         console.error('Autoplay prevented:', error);
       });
