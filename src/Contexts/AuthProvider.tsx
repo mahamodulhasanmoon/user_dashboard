@@ -178,9 +178,10 @@ const originalUser = {...data?.data,plans:filteredArr}
     eventName = 'infoUpdate'
   }
     
+  console.log(eventName);
   
 
-   receive('infoUpdate', () => {
+   receive(eventName, () => {
      
       const audio = new Audio('notification.mp3');
       audio.load()
