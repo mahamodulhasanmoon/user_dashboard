@@ -15,7 +15,7 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
-          npm install
+          npm i
           npm run build
 
       - name: 📂 Sync files
