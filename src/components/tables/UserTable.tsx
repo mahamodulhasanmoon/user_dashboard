@@ -3,6 +3,8 @@ import { deleteData, getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 import { getStatusColor } from "../../utils/statusColor";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import moment from "moment";
 const filterArr = [
   {
     label: 'All',
@@ -119,11 +121,11 @@ const UserTable = () => {
                 </td>
 
                 <td className="px-6 py-4">
-                  {formatUtcToLocal(updatedAt)}
+                  {moment(formatUtcToLocal(updatedAt)).fromNow()}
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-5">
-                  <button className="bg-primary  btn" >view</button>
+                  <Link to={`/users/view/${_id}`} className="bg-primary  btn" >view</Link>
                   <button onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>
                   </div>
                 </td>

@@ -4,6 +4,8 @@ import ManageLinks from '../pages/Dashboard/subAdmin/ManageLinks';
 import PendingReq from '../pages/Dashboard/PendingReq';
 import ManageSocials from '../pages/Socials/ManageSocial';
 import Online from '../pages/Online/Online';
+import UserView from '../pages/Userview/UserView';
+
 
  const Support =   lazy(() =>import('../components/Support'));
  const Overview =   lazy(() =>import('../pages/Dashboard/Overview'));
@@ -65,7 +67,7 @@ const adminRoutes = [
   {
     path: '/users/view/:id',
     title: 'users',
-    component: UserManagement,
+    component: UserView,
   },
   {
     path: '/pending',
