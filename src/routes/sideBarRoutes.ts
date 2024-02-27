@@ -15,6 +15,7 @@ export const sideBarRoutes:Array<any> = [
         icon: CiLink,
         link:'/shorter'
     },
+
     {
         title:"Websites",
         icon: CgWebsite,
@@ -44,6 +45,7 @@ export const sideBarSubAdminRoutes:Array<any> = [
         icon: GoPerson,
         link:'/users'
     },
+
     {
         title:"Pending Requests",
         icon: GoPerson,
@@ -84,6 +86,11 @@ export const sideBarAdminRoutes:Array<any> = [
         title:"All user",
         icon: GoPerson,
         link:'/users'
+    },
+    {
+        title:"Online Users",
+        icon: CiLink,
+        link:'/online-users'
     },
     {
         title:"Pending Requests",
