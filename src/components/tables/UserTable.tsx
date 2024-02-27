@@ -105,7 +105,7 @@ const UserTable = () => {
         </thead>
         <tbody className='text-center'>
           {
-            users?.map(({ _id, name, email,role, updatedAt}, index) => (
+            users?.map(({ _id, name, email,role, createdAt}, index) => (
               <tr key={_id} className="odd:bg-stroke odd:dark:bg-black even:bg-transparent even:dark:bg-transparent border-t dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {index + 1}
@@ -121,7 +121,7 @@ const UserTable = () => {
                 </td>
 
                 <td className="px-6 py-4">
-                  {moment(formatUtcToLocal(updatedAt)).fromNow()}
+                  {moment(formatUtcToLocal(createdAt)).fromNow()}
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-5">
