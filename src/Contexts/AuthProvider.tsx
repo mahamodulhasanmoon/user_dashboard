@@ -43,7 +43,7 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const {receive,joinRoom} = useSocket()
+  const {receive,joinRoom,socket,sendToServer} = useSocket()
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const[role,setRole]= useState<string | null >(null)
@@ -61,6 +61,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         if(localStorage.getItem('access_token')){
           const data:any = await getData(`auth/me`);
+                  sendToServer('addUser', data.data._id);
+        // joinRoom('yourRoomName'); 
 
           if (data.status === 'success') {
             const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
@@ -162,7 +164,17 @@ const originalUser = {...data?.data,plans:filteredArr}
 
   };
 
-
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sendToServer('userDisconnected', user?._id);
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+  
+    // Return a cleanup function to remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [sendToServer]);
 
   // socket Connections
   useEffect(() => {
@@ -197,6 +209,14 @@ const originalUser = {...data?.data,plans:filteredArr}
 
   }, [user,receive]);
 
+useEffect(() => {
+  receive('joinRoom', (data:any) => {
+     
+console.log(data.data);
+ 
+  })
+
+},[socket]);
 
     useEffect(() => {
       const requestNotificationPermission = async () => {
