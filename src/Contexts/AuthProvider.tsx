@@ -62,7 +62,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if(localStorage.getItem('access_token')){
           const data:any = await getData(`auth/me`);
                   sendToServer('addUser', data.data._id);
-        // joinRoom('yourRoomName'); 
 
           if (data.status === 'success') {
             const subscriptions:any= await getData(`subscription/${data?.data?._id}`)

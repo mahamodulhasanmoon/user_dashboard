@@ -12,7 +12,7 @@ export default function Online() {
             setUsers(users)
 
         });
-        sendToServer('addUser', user?._id)
+        sendToServer('addUser', user)
         return () => {
           socket.off('userListUpdate');
         };
@@ -23,7 +23,7 @@ export default function Online() {
     <h2 className="text-center text-2xl my-5 ">Online User : {users.length}</h2>
 <h4 className="text-xl">Users Lists:</h4>
     <ul>
-    {  users.map((user:any) =>   <li key={user}>{user}</li>)}
+    {  users.map((user:any) =>   <li key={user}>{user?.name}</li>)}
     
     </ul>
     </div>
