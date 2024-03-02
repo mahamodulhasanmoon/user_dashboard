@@ -41,7 +41,7 @@ export default function PaymentModal() {
         // amount:amount,
         category:checkedItems
       }
-      console.log(originalData);
+      
       const response = await postData("orders/request", originalData)
       toast.success((response as any).message)
       setShowModal(false)
