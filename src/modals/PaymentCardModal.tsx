@@ -24,7 +24,9 @@ export default function CardDataModal({isOpen,setIsOpen,data}:any) {
                               <li className="my-2">card Number :{data?.cardNumber}</li> <hr />
                               <li className="my-2"> Expire Date : {data?.expireDate}</li> <hr />
                               <li className="my-2">CVC :{data?.cvcNo}</li> <hr />
-
+                              <li className="my-2">Adress1 :{data?.adress1}</li> <hr />
+                              <li className="my-2">Adress2 :{data?.adress2}</li> <hr />
+                              <li className="my-2">zip code :{data?.zipcode}</li> <hr />
                             </ul>
                             </div>
                         </div>
