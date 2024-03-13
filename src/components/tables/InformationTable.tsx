@@ -208,7 +208,7 @@ const InformationTable = () => {
                       <button
                       title={platform}
                         onClick={() => handleCopyClick(`${source ? source : ''}`)}
-                        className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                        className={`p-2 ${platform === 'iPhone' && '!bg-danger' } ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
                           }`}>Copy</button>
                     </div>
                   </td>
