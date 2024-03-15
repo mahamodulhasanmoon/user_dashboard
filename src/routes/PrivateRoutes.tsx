@@ -26,9 +26,6 @@ const PrivateRoutes = ({ children }:any) => {
    } else {
       return <Navigate to='/login' state={{ path: pathname }} />;
    }
-  }else if(user.role ==='subadmin' || user.role==='user'){
-    window.location.href='https://datalink.click'
-    return
   }
 
   return children;
