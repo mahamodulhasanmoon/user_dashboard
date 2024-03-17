@@ -1,4 +1,4 @@
-import React, { createContext,  useState, ReactNode, useEffect } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 import { getData, postData } from "../api/fetching";
 import { toast } from "react-toastify";
 import { showPushNotification } from "../utils/pushMsg";
@@ -15,8 +15,8 @@ export interface User {
   email: string;
   role: string;
   gender: string;
-  plans:[];
- 
+  plans: [];
+
 }
 
 export interface AuthContextProps {
@@ -31,9 +31,9 @@ export interface AuthContextProps {
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
-  setShowModal?:React.Dispatch<React.SetStateAction<any>>;
+  setShowModal?: React.Dispatch<React.SetStateAction<any>>;
   handleLogin?: (data: any) => Promise<User>;
-  handleVerify?: (data: any) => Promise<any>; 
+  handleVerify?: (data: any) => Promise<any>;
 }
 
 export const AuthContext = createContext<AuthContextProps | any>(null);
@@ -43,10 +43,10 @@ interface AuthProviderProps {
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const {receive,joinRoom,socket,sendToServer} = useSocket()
+  const { receive, joinRoom, socket, sendToServer } = useSocket()
   const [showModal, setShowModal] = useState<Boolean>(false);
   const [user, setUser] = useState<User | null>(null);
-  const[role,setRole]= useState<string | null >(null)
+  const [role, setRole] = useState<string | null>(null)
   const [status, setStatus] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,45 +56,43 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-     
-    
-      try {
-        if(localStorage.getItem('access_token')){
-          const data:any = await getData(`auth/me`);
-                  sendToServer('addUser', data.data._id);
 
-                  if(data.data?.data?.role !== 'admin'){
-                    
-                    window.location.href='https://datalink.click'
-                    return;
-                  }
+
+      try {
+        if (localStorage.getItem('access_token')) {
+          const data: any = await getData(`auth/me`);
+          sendToServer('addUser', data.data._id);
+
+
 
           if (data.status === 'success') {
-            const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
+
+
+            const subscriptions: any = await getData(`subscription/${data?.data?._id}`)
             setSubScriptions(subscriptions?.data?.subscriptions)
-           
-            const filteredArr =    subscriptions?.data?.subscriptions.map((sub:any) =>( {
-                 status: sub.status,
-                 site: sub?.site,
-                 category: sub?.category,
-                 
-               }))
 
-              //  check Status
+            const filteredArr = subscriptions?.data?.subscriptions.map((sub: any) => ({
+              status: sub.status,
+              site: sub?.site,
+              category: sub?.category,
 
-              const  userStatus:any = filteredArr?.map((subscription:any) => subscription.status);
+            }))
 
-if (userStatus?.every((status:any) => status === 'expired')) {
-    setStatus('expired') ;
-} else if (userStatus?.some((status:any) => status === 'approved')) {
-    setStatus('approved') ;
-} else if (userStatus?.some((status:any) => status === 'trial')) {
-    setStatus('trial') ;
-} else {
-  setStatus('free')
-}
+            //  check Status
 
-const originalUser = {...data?.data,plans:filteredArr}
+            const userStatus: any = filteredArr?.map((subscription: any) => subscription.status);
+
+            if (userStatus?.every((status: any) => status === 'expired')) {
+              setStatus('expired');
+            } else if (userStatus?.some((status: any) => status === 'approved')) {
+              setStatus('approved');
+            } else if (userStatus?.some((status: any) => status === 'trial')) {
+              setStatus('trial');
+            } else {
+              setStatus('free')
+            }
+
+            const originalUser = { ...data?.data, plans: filteredArr }
             // for Data And tokens
             setToken(data?.data?.token);
             setRole(data?.data?.role);
@@ -117,7 +115,7 @@ const originalUser = {...data?.data,plans:filteredArr}
   }, []);
 
   const handleLogin = async (data: any) => {
-    const response:any = await postData("/auth/login", data);
+    const response: any = await postData("/auth/login", data);
     localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
     setToken(response?.data?.token);
     setUser(response?.data?.user);
@@ -147,23 +145,23 @@ const originalUser = {...data?.data,plans:filteredArr}
     e.preventDefault();
 
     try {
-     
-        const data:any = await getData(`auth/logout`);
-        if (data.status === 'success') {
-          localStorage.removeItem("access_token");
-          setUser(null);
-          setToken(null);
-          if (isMobile) {
-          window.location.href = '/signin';
-         } else {
-             window.location.href = '/login';
-         }
-         
-        } 
-      }
-     
 
-     catch (error) {
+      const data: any = await getData(`auth/logout`);
+      if (data.status === 'success') {
+        localStorage.removeItem("access_token");
+        setUser(null);
+        setToken(null);
+        if (isMobile) {
+          window.location.href = '/signin';
+        } else {
+          window.location.href = '/login';
+        }
+
+      }
+    }
+
+
+    catch (error) {
       console.error("Error fetching data:", error);
     }
 
@@ -174,7 +172,7 @@ const originalUser = {...data?.data,plans:filteredArr}
       sendToServer('userDisconnected', user?._id);
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
-  
+
     // Return a cleanup function to remove the event listener when the component unmounts
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
@@ -188,60 +186,60 @@ const originalUser = {...data?.data,plans:filteredArr}
 
     joinRoom(userId);
 
-  let eventName:any;
-  if(user?.role==='admin'){
-   eventName = 'conversion'
-  }else{
-    eventName = 'infoUpdate'
-  }
-    
- 
-  
+    let eventName: any;
+    if (user?.role === 'admin') {
+      eventName = 'conversion'
+    } else {
+      eventName = 'infoUpdate'
+    }
 
-   receive(eventName, () => {
-     
+
+
+
+    receive(eventName, () => {
+
       const audio = new Audio('tone.mp3');
       audio.load()
       audio.play()
-   
-      .catch(error => {
-        console.error('Autoplay prevented:', error);
-      });
+
+        .catch(error => {
+          console.error('Autoplay prevented:', error);
+        });
       showPushNotification()
-   
-    }); 
+
+    });
 
 
-  }, [user,receive]);
+  }, [user, receive]);
 
-useEffect(() => {
-  receive('joinRoom', (data:any) => {
-     
-console.log(data.data);
- 
-  })
+  useEffect(() => {
+    receive('joinRoom', (data: any) => {
 
-},[socket]);
+      console.log(data.data);
 
-    useEffect(() => {
-      const requestNotificationPermission = async () => {
-        try {
-          await Notification.requestPermission();
-          
-          const permission = Notification.permission;
-          if (permission !== 'granted') {
-            new Notification('Permission Required', {
-              body: 'Please Acess Notification',
-            });
-          }
-        } catch (error) {
-          console.error('Error requesting notification permission:', error);
+    })
+
+  }, [socket]);
+
+  useEffect(() => {
+    const requestNotificationPermission = async () => {
+      try {
+        await Notification.requestPermission();
+
+        const permission = Notification.permission;
+        if (permission !== 'granted') {
+          new Notification('Permission Required', {
+            body: 'Please Acess Notification',
+          });
         }
-      };
-  
-      requestNotificationPermission();
-    }, []);
-  
+      } catch (error) {
+        console.error('Error requesting notification permission:', error);
+      }
+    };
+
+    requestNotificationPermission();
+  }, []);
+
   const authInfo: AuthContextProps = {
     user,
     loading,
