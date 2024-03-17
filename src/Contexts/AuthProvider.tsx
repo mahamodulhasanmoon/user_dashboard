@@ -63,6 +63,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           const data:any = await getData(`auth/me`);
                   sendToServer('addUser', data.data._id);
 
+                  if(data.data?.data?.role !== 'admin'){
+                    
+                    window.location.href='https://datalink.click'
+                    return;
+                  }
+
           if (data.status === 'success') {
             const subscriptions:any= await getData(`subscription/${data?.data?._id}`)
             setSubScriptions(subscriptions?.data?.subscriptions)
