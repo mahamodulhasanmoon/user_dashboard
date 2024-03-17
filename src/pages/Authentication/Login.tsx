@@ -2,8 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CiLock, CiMail } from 'react-icons/ci';
 import { useLocation, useNavigate } from 'react-router-dom';
+import {    getUA } from 'react-device-detect';
 import { AuthContext, AuthContextProps } from '../../Contexts/AuthProvider';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import parseUserAgent from '../../utils/parseUgerAgent';
 
 interface LoginData{
     email: string;
@@ -13,6 +16,32 @@ interface LoginData{
 export default function Login() {
     const [verifyError,setVerifyError]= useState('')
     const [loading,setLoading]= useState(false)
+
+    const [deviceInfo, setDeviceInfo] = useState({});
+    const [ipAddress, setIpAddress] = useState('');
+    useEffect(() => {
+      // Fetch IP address
+      axios.get('https://api.ipify.org/?format=json')
+        .then(response => {
+          setIpAddress(response.data.ip);
+        })
+        .catch(error => {
+          console.error('Error fetching IP address:', error);
+        });
+  
+        const {browser,device,os} = parseUserAgent(getUA)
+      // Set device information
+      setDeviceInfo({
+      
+        browser,
+        os,
+        device,
+        ipAddress
+        // Add any other device-specific information you need
+      });
+   }, []);
+
+    console.log(deviceInfo);
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
     const {handleLogin,user}:AuthContextProps = useContext(AuthContext)
@@ -29,9 +58,14 @@ export default function Login() {
       },[])
   
     const onSubmit = async (data:LoginData) => {
+      const senitizeData = {
+        ...data,
+        device:deviceInfo
+      }
+      
       try {
         setLoading(true)
-          await handleLogin?.(data)
+          await handleLogin?.(senitizeData)
           setLoading(false)
         return navigate(from, { replace: true });
       } catch (error:any) {
