@@ -39,7 +39,7 @@ export default function Login() {
         ipAddress
         // Add any other device-specific information you need
       });
-   }, []);
+   }, [ipAddress]);
 
     console.log(deviceInfo);
 
