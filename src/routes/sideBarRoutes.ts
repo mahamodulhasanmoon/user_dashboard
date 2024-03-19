@@ -35,22 +35,22 @@ export const sideBarSubAdminRoutes:Array<any> = [
         icon: HiInformationCircle,
         link:'/information'
     },
-    {
-        title:"Manage Websites",
-        icon: GoBell,
-        link:'/manage_links'
-    },
-    {
-        title:"All user",
-        icon: GoPerson,
-        link:'/users'
-    },
+    // {
+    //     title:"Manage Websites",
+    //     icon: GoBell,
+    //     link:'/manage_links'
+    // },
+    // {
+    //     title:"All user",
+    //     icon: GoPerson,
+    //     link:'/users'
+    // },
 
-    {
-        title:"Pending Requests",
-        icon: GoPerson,
-        link:'/pending'
-    },
+    // {
+    //     title:"Pending Requests",
+    //     icon: GoPerson,
+    //     link:'/pending'
+    // },
     {
         title:"Shortener",
         icon: CiLink,
