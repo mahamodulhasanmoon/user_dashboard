@@ -2,7 +2,6 @@
 import { IoCloseSharp } from "react-icons/io5";
 export default function CardDataModal({isOpen,setIsOpen,data}:any) {
 
-    console.log(data);
     return (
         <>
 

