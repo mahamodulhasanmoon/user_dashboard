@@ -41,7 +41,6 @@ export default function Login() {
       });
    }, [ipAddress]);
 
-    console.log(deviceInfo);
 
     const { register, handleSubmit, formState: { errors } } = useForm<LoginData>();
     const {handleLogin,user}:AuthContextProps = useContext(AuthContext)
@@ -67,7 +66,7 @@ export default function Login() {
         setLoading(true)
           await handleLogin?.(senitizeData)
           setLoading(false)
-        return navigate(from, { replace: true });
+        return navigate('/verify_otp');
       } catch (error:any) {
         setLoading(false)
         console.log(error.response);

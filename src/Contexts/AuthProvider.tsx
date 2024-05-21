@@ -26,6 +26,7 @@ export interface AuthContextProps {
   showModal?: any;
   subscription?: any;
   token?: string | null;
+  email?: string | null;
   status?: string | null;
   role?: string | null;
   setToken?: React.Dispatch<React.SetStateAction<string | null>>;
@@ -33,6 +34,7 @@ export interface AuthContextProps {
   setUser?: React.Dispatch<React.SetStateAction<User | null>>;
   setShowModal?: React.Dispatch<React.SetStateAction<any>>;
   handleLogin?: (data: any) => Promise<User>;
+  handleLoginOTP?: (data: any) => Promise<User>;
   handleVerify?: (data: any) => Promise<any>;
 }
 
@@ -49,6 +51,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [role, setRole] = useState<string | null>(null)
   const [status, setStatus] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [subscription, setSubScriptions] = useState([]);
 
@@ -114,14 +117,23 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     fetchData();
   }, []);
 
-  const handleLogin = async (data: any) => {
-    const response: any = await postData("/auth/login", data);
+  const handleLoginOTP = async (data: any) => {
+    const response: any = await postData("/auth/otp_validate", data);
     localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
     setToken(response?.data?.token);
     setUser(response?.data?.user);
     if (response?.status === 200) {
       toast.success("Successfully logged in");
       // reset(); 
+      return response;
+    }
+  };
+  const handleLogin = async (data: any) => {
+    const response: any = await postData("/auth/login", data);
+    setEmail(response?.email);
+    if (response?.status === 200) {
+      toast.success(response?.message);
+      
       return response;
     }
   };
@@ -254,7 +266,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setShowModal,
     handleVerify,
     status,
-    subscription
+    subscription,
+    email,
+    handleLoginOTP
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

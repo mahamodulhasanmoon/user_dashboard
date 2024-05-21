@@ -30,23 +30,23 @@ const InformationTable = () => {
   }
 
 
-  const handleDisabled = async (id: any,type:any,status:any) => {
-    console.log(type,'status');
-    console.log('called');
-    try {
-      let orstatus;
-      if(!status){
-        orstatus = true
-      }else{
-        orstatus = false
-      }
+  // const handleDisabled = async (id: any,type:any,status:any) => {
+  //   console.log(type,'status');
+  //   console.log('called');
+  //   try {
+  //     let orstatus;
+  //     if(!status){
+  //       orstatus = true
+  //     }else{
+  //       orstatus = false
+  //     }
     
-      await getData(`/information/${id}/status?${type}=${orstatus}`)
-      setIsRefresh(Math.random())
-    } catch (error: any) {
-      throw new Error(error)
-    }
-  }
+  //     await getData(`/information/${id}/status?${type}=${orstatus}`)
+  //     setIsRefresh(Math.random())
+  //   } catch (error: any) {
+  //     throw new Error(error)
+  //   }
+  // }
 
   
 
