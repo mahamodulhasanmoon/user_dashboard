@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { deleteData, getData } from "../../api/fetching";
 import { formatUtcToLocal } from "../../utils/DateFormater";
 import { getStatusColor } from "../../utils/statusColor";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { AuthContext } from "../../Contexts/AuthProvider";
+import useInformation from "../../hooks/useInformation";
 const filterArr = [
   {
     label: 'All',
@@ -23,6 +25,7 @@ const filterArr = [
 
 
 const UserTable = () => {
+  const {role:userRole} = useInformation()
   const [selectedValue, setSelectedValue] = useState<String>(filterArr[0].value)
   const [users, setUsers] = useState([])
   const [refresh,setRefresh]= useState<any>(0)
@@ -126,7 +129,10 @@ const UserTable = () => {
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-5">
                   <Link to={`/users/view/${_id}`} className="bg-primary  btn" >view</Link>
-                  <button onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>
+                  {
+                    userRole==='admin' &&  (<button onClick={()=>deleteUserHandler(_id,email)} className="bg-danger  btn">Delete</button>)
+                  }
+                  
                   </div>
                 </td>
                 

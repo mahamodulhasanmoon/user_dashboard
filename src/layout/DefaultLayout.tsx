@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import PaymentModal from '../modals/PaymentModal';
 import ActivationModal from '../modals/ActivationModal';
 import { AuthContext } from '../Contexts/AuthProvider';
+import NoticeModal from '../modals/NoticeModal';
 
 
 
@@ -15,10 +16,11 @@ const DefaultLayout = () => {
   return (
     <div className="dark:bg-boxdark-2  dark:text-bodydark">
       {
-!user?.isActive && (
+(!user?.isActive && user.role !== 'admin') && (
   <ActivationModal/>
 )
       }
+       {/* <NoticeModal/> */}
      
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

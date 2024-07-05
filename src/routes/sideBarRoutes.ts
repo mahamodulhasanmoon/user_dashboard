@@ -40,11 +40,11 @@ export const sideBarSubAdminRoutes:Array<any> = [
     //     icon: GoBell,
     //     link:'/manage_links'
     // },
-    // {
-    //     title:"All user",
-    //     icon: GoPerson,
-    //     link:'/users'
-    // },
+    {
+        title:"All user",
+        icon: GoPerson,
+        link:'/users'
+    },
 
     // {
     //     title:"Pending Requests",

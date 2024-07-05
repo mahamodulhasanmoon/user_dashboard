@@ -4,6 +4,7 @@ import Login from './Login';
 import Register from './Register';
 export default function Auth() {
     const [isSignUp,setIsSignUp]= useState(false)
+    const [message,setMessage] = useState('')
 
   return (
  <div className='bg-black' >
@@ -26,9 +27,11 @@ export default function Auth() {
         <div className="overlay-panel overlay-right">
           <h1 className="big_heading mb-5">Free Trial</h1>
 
-          <p className="para mb-6">Enter your personal details Verify Your Email Adress and start 30 minutes Free trial</p>
+          <p className="para mb-6 ">Enter your personal details Verify Your Email Adress and start 30 minutes Free trial</p>
 
-          <button onClick={()=>setIsSignUp(true)} className="ghost login_button" id="signUp">Sign Up</button>
+         { message && (<p className="para mb-6 text-[#ddd] font-bold">{message}</p>) }
+
+          <button onClick={()=>setMessage("please contact Admin For new Account admin skype: live:.cid.2570906b4464082c")} className="ghost login_button" id="signUp">Sign Up</button>
         </div>
       </div>
     </div>

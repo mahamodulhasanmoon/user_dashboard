@@ -268,7 +268,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     status,
     subscription,
     email,
-    handleLoginOTP
+    handleLoginOTP,
+    
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

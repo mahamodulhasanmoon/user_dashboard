@@ -46,10 +46,10 @@ export default function UserManagement() {
         user: userData.data._id,
         subscriptions: data.subscriptions
       };
-      
+      console.log(subScriptionData);
     
       await await postData("subscription", subScriptionData)
-      toast.success((userData as any).message)
+      // toast.success((userData as any).message)
       setUserForm(false)
     } catch (error) {
       console.log((error as any).message)
@@ -162,7 +162,7 @@ export default function UserManagement() {
                                 onChange={e => {
                                   if (e.target.checked) {
                                     const startDate = formatDate(new Date());
-                                    const endDate = formatDate(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000));
+                                    const endDate = formatDate(new Date(Date.now() + 365 * 24 * 60 * 60 * 1000));
                                     append({ site: option.value, category: [], startDate, endDate, status: 'approved' });
                                   } else {
                                     remove(fields.findIndex((field: any) => field?.site === option.value));

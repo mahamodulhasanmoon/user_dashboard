@@ -77,6 +77,7 @@ function Status() {
       }
     }
   }, [user]);
+ 
 
   const renderContent = () => {
     if ( status === 'trial') {
@@ -108,7 +109,8 @@ function Status() {
         </div>
        
       );
-    } else {
+    } 
+    else if(status === 'pending') {
       return (
         <div className='flex items-center justify-center'>
           <p className='text-[#ff0000] font-bold'>Your Account Is Now Under Review Please wait 2 to 12 hour</p>
@@ -116,6 +118,13 @@ function Status() {
           onClick={() => setShowModal(true)}
           disabled={!user?.isActive}
           className={`bg-[#ff0000] text-white py-1 px-3 mx-2 font-bold ${!user.isActive && 'disabled:cursor-not-allowed'}`}>Buy Primium</button>
+        </div>
+      );
+    }
+    else if(status === 'approved') {
+      return (
+        <div className='flex items-center justify-center'>
+       
         </div>
       );
     }

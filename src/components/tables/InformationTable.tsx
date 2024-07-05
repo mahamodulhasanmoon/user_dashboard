@@ -3,7 +3,7 @@ import { formatUtcToLocal } from "../../utils/DateFormater";
 import { handleCopyClick } from "../../utils/copyToClipboard";
 import Loader from "../../common/Loader";
 import useInformation from "../../hooks/useInformation";
-import { getData, updateData } from "../../api/fetching";
+import {  updateData } from "../../api/fetching";
 import {  PaginationNav1Presentation } from "../Pagination/Pagination";
 import { useState } from "react";
 import CardDataModal from "../../modals/PaymentCardModal";
