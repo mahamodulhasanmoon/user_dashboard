@@ -30,21 +30,21 @@ export const sideBarRoutes:Array<any> = [
 
 export const sideBarSubAdminRoutes:Array<any> = [
 
-    {
-        title:"Information",
-        icon: HiInformationCircle,
-        link:'/information'
-    },
+    // {
+    //     title:"Information",
+    //     icon: HiInformationCircle,
+    //     link:'/information'
+    // },
     // {
     //     title:"Manage Websites",
     //     icon: GoBell,
     //     link:'/manage_links'
     // },
-    {
-        title:"All user",
-        icon: GoPerson,
-        link:'/users'
-    },
+    // {
+    //     title:"All user",
+    //     icon: GoPerson,
+    //     link:'/users'
+    // },
 
     // {
     //     title:"Pending Requests",
@@ -56,11 +56,11 @@ export const sideBarSubAdminRoutes:Array<any> = [
         icon: CiLink,
         link:'/shorter'
     },
-    {
-        title:"Websites",
-        icon: CgWebsite,
-        link:'/web_links'
-    },
+    // {
+    //     title:"Websites",
+    //     icon: CgWebsite,
+    //     link:'/web_links'
+    // },
     {
         title:"Notice",
         icon: GoBell,

@@ -73,10 +73,12 @@ export default function NoticeModal() {
         <>
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-999">
             <div className="bg-form-strokedark rounded shadow-lg p-6 w-1/2  backdrop-blur-md">
-              <h2 className="text-center text-2xl font-bold text-danger mb-5">ইনফো সম্পর্কিত  নোটিস</h2>
+              <h2 className="text-center text-2xl font-bold text-danger mb-5">লগিন সম্পর্কিত  নোটিস</h2>
               <hr />
 
-              <p className="text-gray-3 text-xl my-5"> ২ ঘণ্টার ভিতর এডমিন প্লাস ইউজার ইনফোরমেশন সব কিছু রিসেট  হয়ে যাবে দয়া করে প্রত্যেকে আপনাদের নিজেদের ইনফরমেশনের ব্যাকাপ নিয়ে নিন। অন্যথায় এডমিন দায়ী থাকবে না। ধন্যবাদ</p> <br />
+              <p className="text-gray-3 text-xl my-5"> ওয়েবসাইটের ডোমেইন পরিবর্তন হয়েছে। দয়া করে ভিজিট করুন আমাদের নতুন ডোমেইনে <br/> 
+              <a href="https://datalink.click">https://datalink.click</a> 
+                </p> <br />
 
               <div className="text-center mx-auto">
                 <div className="mx-auto">
