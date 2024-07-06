@@ -18,9 +18,14 @@ const DefaultLayout = () => {
       {
 (!user?.isActive && user.role !== 'admin') && (
   <ActivationModal/>
+  
 )
       }
-       {/* <NoticeModal/> */}
+       {
+        user.role!=='admin'&&(
+          <NoticeModal/>
+        )
+       }
      
       <div className="flex h-screen overflow-hidden">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
