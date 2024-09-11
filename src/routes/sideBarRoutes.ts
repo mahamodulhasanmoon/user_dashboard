@@ -103,6 +103,11 @@ export const sideBarAdminRoutes:Array<any> = [
         link:'/shorter'
     },
     {
+        title:"Shortner Request",
+        icon: CiLink,
+        link:'/shorter-request'
+    },
+    {
         title:"Websites",
         icon: CgWebsite,
         link:'/web_links'

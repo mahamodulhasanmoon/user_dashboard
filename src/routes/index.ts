@@ -5,6 +5,7 @@ import PendingReq from '../pages/Dashboard/PendingReq';
 import ManageSocials from '../pages/Socials/ManageSocial';
 import Online from '../pages/Online/Online';
 import UserView from '../pages/Userview/UserView';
+import ShortnerList from '../pages/Dashboard/ShortnerList';
 
 
  const Support =   lazy(() =>import('../components/Support'));
@@ -63,6 +64,11 @@ const adminRoutes = [
     path: '/online-users',
     title: 'Online Users',
     component: Online,
+  },
+  {
+    path: '/shorter-request',
+    title: 'Shorter Request',
+    component: ShortnerList,
   },
   {
     path: '/users/view/:id',
