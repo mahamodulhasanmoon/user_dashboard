@@ -89,6 +89,7 @@ export default function ShortnerList() {
                 <th className="border border-gray-300 px-4 py-2">Payment Number</th>
                 <th className="border border-gray-300 px-4 py-2">Transaction Screenshot</th>
                 <th className="border border-gray-300 px-4 py-2">Total Price (USD)</th>
+                <th className="border border-gray-300 px-4 py-2">Domain</th>
                 <th className="border border-gray-300 px-4 py-2">Status</th>
                 <th className="border border-gray-300 px-4 py-2">Created At</th>
                 <th className="border border-gray-300 px-4 py-2">Actions</th>
@@ -115,6 +116,9 @@ export default function ShortnerList() {
                     }`}
                   >
                     {data.status}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {data?.domain}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {new Date(data.createdAt).toLocaleDateString()}
