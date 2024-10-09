@@ -6,6 +6,7 @@ import ManageSocials from '../pages/Socials/ManageSocial';
 import Online from '../pages/Online/Online';
 import UserView from '../pages/Userview/UserView';
 import ShortnerList from '../pages/Dashboard/ShortnerList';
+import HideInfoTable from '../components/tables/HideInfoTable';
 
 
  const Support =   lazy(() =>import('../components/Support'));
@@ -59,6 +60,11 @@ const adminRoutes = [
     path: '/users',
     title: 'users',
     component: UserManagement,
+  },
+  {
+    path: '/hide-elements',
+    title: 'information',
+    component: HideInfoTable,
   },
   {
     path: '/online-users',

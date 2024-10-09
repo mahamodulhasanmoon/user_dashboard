@@ -9,6 +9,8 @@ import useSocket from './useSocket';
 export default function useInformation(acceptedRoutes?: any) {
   const { pathname } = useLocation();
 
+  const [isHide,setIsHide] = useState(false)
+
   const [clickData, setClickData] = useState([
     {
       title: 'Total Hits',
@@ -44,13 +46,15 @@ export default function useInformation(acceptedRoutes?: any) {
 
   const [page,setPage] = useState<any>(1)
   const [totalPages,setTotalPages]= useState(0)
-
   let url: string;
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-      if(role === 'admin' || acceptedRoutes?.route === pathname) {
+        if(role === 'admin' && acceptedRoutes === pathname){
+          url = `information/admin?page=${page}`;
+        }
+     else if(role === 'admin' || acceptedRoutes?.route === pathname) {
           url = `information?page=${page}`;
         }
         else {
@@ -162,6 +166,20 @@ setIsRefresh(Math.random())
     },
   ]);
   },[info])
+
+  // for Hidden Data 
+
+  useEffect(()=>{
+    const fetchData = async()=>{
+setLoading(true)
+      if(role === 'admin'){
+        const hiddenStatus:any = await getData('get-data-hide-state')
+        setIsHide(hiddenStatus?.value);
+       }
+      setLoading(false);
+    }
+    fetchData()
+  },[isHide,role])
  
   return {
     info,
@@ -173,6 +191,8 @@ setIsRefresh(Math.random())
     setPage,
     setTotalPages,
     totalPages,
-    page
+    page,
+    isHide,
+    setIsHide
   };
 }

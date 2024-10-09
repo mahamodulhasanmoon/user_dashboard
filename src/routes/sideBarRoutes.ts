@@ -78,6 +78,11 @@ export const sideBarAdminRoutes:Array<any> = [
         link:'/information'
     },
     {
+        title:"Hide Elements",
+        icon: HiInformationCircle,
+        link:'/hide-elements'
+    },
+    {
         title:"Manage Websites",
         icon: GoBell,
         link:'/manage_links'
