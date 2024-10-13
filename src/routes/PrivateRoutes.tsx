@@ -19,7 +19,7 @@ const PrivateRoutes = ({ children }:any) => {
     </>;
 }
 
-if(!loading && user.role === "subadmin" || user.role === "user") {
+if(!loading && user?.role === "subadmin" || user?.role === "user") {
   return <Navigate to='/blocked'  />;
 }
 
