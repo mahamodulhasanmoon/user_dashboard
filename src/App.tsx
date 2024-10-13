@@ -10,6 +10,7 @@ import SignUp from './pages/Authentication/SignUp';
 import VerifyOTP from './pages/Authentication/VerifyOTP';
 import Auth from './pages/Authentication/Auth';
 import SignIn from './pages/Authentication/SignIn';
+import Blocked from './components/Blocked';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         
         <Route path="/login" element={<Auth />} />
+        <Route path="/blocked" element={<Blocked />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/free_trial" element={<SignUp />} />
         <Route path="/reset-password" element={<SignUp />} />

@@ -7,6 +7,7 @@ import Online from '../pages/Online/Online';
 import UserView from '../pages/Userview/UserView';
 import ShortnerList from '../pages/Dashboard/ShortnerList';
 import HideInfoTable from '../components/tables/HideInfoTable';
+import Blocked from '../components/Blocked';
 
 
  const Support =   lazy(() =>import('../components/Support'));
@@ -22,6 +23,11 @@ const coreRoutes = [
     path: '/overview',
     title: 'Page Overview',
     component: Overview,
+  },
+  {
+    path: '/blocked',
+    title: 'Page Overview',
+    component: Blocked,
   },
   {
     path: '/information',

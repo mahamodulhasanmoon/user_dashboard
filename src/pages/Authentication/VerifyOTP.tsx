@@ -20,8 +20,14 @@ const VerifyOTP = () => {
     const from = location.state?.from?.pathname || '/';
 
     useEffect(()=>{
-      if (user) {
+
+      
+      if (user?.role==='admin') {
         return navigate(from, { replace: true });
+       }
+       if(user?.role==='subadmin' || user?.role==='user'){
+        return navigate('/blocked');
+ 
        }
    
     },[])
@@ -29,7 +35,11 @@ const VerifyOTP = () => {
   const onSubmit = async (data:LoginData) => {
     try {
       setLoading(true)
-        await handleLoginOTP?.({...data,email:email})
+       const res =  await handleLoginOTP?.({...data,email:email})
+       if(res?.role==='user' || res?.role==='subadmin'){
+        // toast.error('You are not authorized to access this page')
+        return navigate('/blocked');
+       }
         setLoading(false)
       return navigate(from, { replace: true });
     } catch (error:any) {

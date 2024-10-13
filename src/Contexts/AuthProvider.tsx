@@ -122,16 +122,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.setItem("access_token", JSON.stringify(response?.data?.token));
     setToken(response?.data?.token);
     setUser(response?.data?.user);
-    if (response?.status === 200) {
+    console.log(response);
+    if (response?.status === 'success') {
       toast.success("Successfully logged in");
       // reset(); 
-      return response;
+      return response.data.user;
     }
   };
   const handleLogin = async (data: any) => {
     const response: any = await postData("/auth/login", data);
     setEmail(response?.email);
-    if (response?.status === 200) {
+    if (response?.status === 'success') {
       toast.success(response?.message);
       
       return response;
